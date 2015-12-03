@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .top
+    .nav
+      .container
+        h2 GamesDB
+        ul
+          li 
+            a(href="login.html") Login
+          li 
+            a(href="register.html") Register
+
+    .jumbotron 
+      .container
+        h1 We help you to keep track of all the games in your collection.
+        a(href="register.html" class="btn btn-danger") Sign Up
+
+  .main
+    .container
+      .row
+        .col-md-4
+          h2 Game Suggestions
+          p Our software will suggest similar games to you from the games you have entered into your list.
+        .col-md-4
+          h2 Easy to Use
+          p Simply just type in the game you want to add to your list, and it will be instantly added.
+        .col-md-4
+          h2 Share
+          p Add Friends to your profile, and you can see what games you have in common.
+
+  .footer
+    .container
+      p &copy; Michael Tugby. Created in 2015.
