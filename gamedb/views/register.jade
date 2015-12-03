@@ -1,0 +1,43 @@
+extends layout
+
+block scripts
+  link(rel='stylesheet', href='/stylesheets/register.css')
+
+block content
+  .nav
+    .container
+      h2 GamesDB
+      ul
+        li 
+          a(href="login") Login
+        li 
+          a(href="register") Register
+
+  .main
+    .container
+      h2 Registration Form
+      form(name='registration-form', method='post')
+        .input
+          span Username
+          input(type="text" name="username")
+        .input
+          span Password
+          input(type="password" name="password")
+        .input
+          span First Name
+          input(type="text" name="first-name")
+        .input
+          span Surname
+          input(type="text" name="last-name")
+        .input
+          span Date of Birth
+          input(type="date" name="date-of-birth")
+        .input
+          span Email Address
+          input(type="email" name="email-address")
+        .input
+          input(type="submit" value="Submit")
+
+  .footer
+    .container
+      p &copy; Michael Tugby. Created in 2015.
