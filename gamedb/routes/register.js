@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Registration = require('../models/register-model');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
@@ -23,9 +22,12 @@ router.post('/', function(req, res, next) {
       name: { first: firstname, last: lastname },
       dob: dob,
       email: email            
-  }, function(result) {
-      if()
-      res.render('register', { title: 'GameDB' });
+  }, function(err, result) {
+      if(err) {
+          res.render('register', { title: 'GameDB', result: 'There was an error submitting your registration. Please try again later.'});
+      } else {
+      res.render('register', { title: 'GameDB', result: 'You have been successfully registered.' });
+      }
   });
     
 })

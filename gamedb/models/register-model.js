@@ -25,11 +25,29 @@ module.exports.addNewUser = function(user, callback) {
     
     user.save(function(err, result) {
         if(err) {
-            throw(err);
+            return callback(err);
         }
-        callback({
+        return callback(null, {
             response: "Successfully added one new user.",
             user: result
         });
+    });
+}
+
+module.exports.findUser = function(user, callback) {
+    var username = user.username,
+        password = user.password;
+    
+    User.findOne({ username: username, password: password }, 'name', function(err, user) {
+        if(err) {
+            return callback(err);
+        } else if(!user) {
+            return callback(null, null);
+        } else {
+        return callback(null, {
+            response: 'Found user.',
+            name: user.name
+        });
+        }
     });
 }
