@@ -9,10 +9,6 @@ body {
     margin: 0 auto;
 }
 
-.top {
-    background: url("http://bc-gb.com/wp-content/uploads/2013/10/gaming-wallpapers-games-291.jpg") no-repeat center center;
-}
-
 /* Navigation */
 
 .nav .container {
@@ -50,6 +46,7 @@ body {
 .jumbotron {
     height: 500px;
     background-color: transparent;
+    background: url("http://bc-gb.com/wp-content/uploads/2013/10/gaming-wallpapers-games-291.jpg") no-repeat center center;
 }
 
 .jumbotron .container {

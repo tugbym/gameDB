@@ -5,13 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
 
 var index = require('./routes/index');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 var register = require('./routes/register');
 
 var app = express();
-
 mongoose.connect('mongodb://localhost/GameDB');
 
 // view engine setup
@@ -26,8 +29,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use(function(req, res, next) {
+    if(req.session.passport !== undefined) {
+        if(req.session.passport['user'] ) {
+            res.locals.session = req.session.passport.user.name.first;
+        }
+    }
+    next();
+})
+
 app.use('/', index);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/register', register);
 
 // catch 404 and forward to error handler

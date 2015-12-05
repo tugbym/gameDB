@@ -6,4 +6,18 @@ html
     link(rel='stylesheet', href='/stylesheets/main.css')
     block scripts
   body
-    block content
+    .nav
+      .container
+        h2 GamesDB
+        ul
+          if !session
+            li
+              a(href="login") Login
+            li 
+              a(href="register") Register
+          else
+            li
+              a(href="profile")=session
+            li
+              a(href="logout") Logout
+  block content
