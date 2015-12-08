@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= title
+    title GameDB
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/main.css')
     block scripts
@@ -17,7 +17,7 @@ html
               a(href="register") Register
           else
             li
-              a(href="profile")=session
+              a(href="profile")=session.name.first
             li
               a(href="logout") Logout
   block content

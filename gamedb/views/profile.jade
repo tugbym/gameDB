@@ -1,23 +1,13 @@
 extends layout
 
 block scripts
-  link(rel='stylesheet', href='/stylesheets/register.css')
+  link(rel='stylesheet', href='/stylesheets/profile.css')
 
 block content
   .main
     .container
-      h2 Login
-      form(name='login-form', method='post')
-        .input
-          span Username
-          input(type="text" name="username")
-        .input
-          span Password
-          input(type="password" name="password")
-        .input
-          input(type="submit" value="Submit")
-          
-        p=result
+        h2=session.name.first + '\'\s games:'
+        h3=response
 
   .footer
     .container

@@ -27,7 +27,7 @@ module.exports.addNewUser = function(user, callback) {
     
     user.save(function(err, result) {
         if(err) {
-            return callback(err, null);
+            return callback(err);
         }
         return callback(null, {
             response: "Successfully added one new user.",
@@ -37,7 +37,7 @@ module.exports.addNewUser = function(user, callback) {
 }
 
 passport.serializeUser(function(user, done) {
-  done(null, {_id: user._id, name: user.name} );
+  done(null, {_id: user._id, name: user.name, username: user.username} );
 });
 
 passport.deserializeUser(function (user, done) {

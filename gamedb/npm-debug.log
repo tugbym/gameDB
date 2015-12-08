@@ -19,7 +19,7 @@
 10 error You can get their info via:
 10 error     npm owner ls gamedb
 10 error There is likely additional logging output above.
-11 error System Linux 3.19.0-25-generic
+11 error System Linux 4.2.0-19-generic
 12 error command "/home/codio/.nvm/v0.10.33/bin/node" "/home/codio/.nvm/v0.10.33/bin/npm" "start"
 13 error cwd /home/codio/workspace/gamedb
 14 error node -v v0.10.33

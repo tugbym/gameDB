@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('register', { title: 'GameDB' });
+  res.render('register');
 });
 
 router.post('/', function(req, res, next) {
@@ -24,9 +24,9 @@ router.post('/', function(req, res, next) {
       email: email            
   }, function(err, result) {
       if(err) {
-          res.render('register', { title: 'GameDB', result: 'There was an error submitting your registration. Please try again later.'});
+          res.render('register', { result: 'There was an error submitting your registration. Please try again later.'});
       } else {
-      res.render('register', { title: 'GameDB', result: 'You have been successfully registered.' });
+      res.render('register', { result: 'You have been successfully registered.' });
       }
   });
     

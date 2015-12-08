@@ -6,7 +6,7 @@ var passport = require('passport');
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'GameDB' });
+  res.render('login');
 });
 
 router.post('/',

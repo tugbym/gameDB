@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var session = require('express-session');
-var flash = require('connect-flash');
+var express = require('express'),
+    path = require('path'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    passport = require('passport'),
+    session = require('express-session'),
+    flash = require('connect-flash');
 
-var index = require('./routes/index');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var register = require('./routes/register');
+var index = require('./routes/index'),
+    login = require('./routes/login'),
+    logout = require('./routes/logout'),
+    register = require('./routes/register'),
+    profile = require('./routes/profile');
 
 var app = express();
 mongoose.connect('mongodb://localhost/GameDB');
@@ -37,7 +38,7 @@ app.use(flash());
 app.use(function(req, res, next) {
     if(req.session.passport !== undefined) {
         if(req.session.passport['user'] ) {
-            res.locals.session = req.session.passport.user.name.first;
+            res.locals.session = req.session.passport.user;
         }
     }
     next();
@@ -47,6 +48,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
