@@ -1,0 +1,23 @@
+extends layout
+
+block scripts
+  link(rel='stylesheet', href='/stylesheets/profile.css')
+
+block content
+  .main
+    .container
+      .search
+        .container
+          form(name='search-form', method='post')
+              span Search
+              input(type='text' name='search-query')
+              span Search By
+              select(name='search-by')
+                option(value='game') Title
+                option(value='console') Console
+                option(value='genre') Genre
+              input(type='submit' value='Submit')
+      
+      .results
+        .container
+          p=results

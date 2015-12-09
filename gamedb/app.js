@@ -13,7 +13,8 @@ var index = require('./routes/index'),
     login = require('./routes/login'),
     logout = require('./routes/logout'),
     register = require('./routes/register'),
-    profile = require('./routes/profile');
+    profile = require('./routes/profile'),
+    add_game = require('./routes/add_game')
 
 var app = express();
 mongoose.connect('mongodb://localhost/GameDB');
@@ -49,6 +50,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
 app.use('/profile', profile);
+app.use('/add_game', add_game);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

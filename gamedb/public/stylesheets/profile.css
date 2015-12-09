@@ -1,1 +1,13 @@
-/* Profile */
+/* Search Bar */
+
+.search span {
+    padding: 10px;
+}
+
+.search input, select {
+    margin-right: 30px;
+}
+
+.search input, option, select {
+    color: black;
+}
