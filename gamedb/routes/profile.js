@@ -21,13 +21,17 @@ router.get('/', function(req, res, next) {
       
       var id = req.session.passport.user._id,
           response;
-      Profile.getGameList(id, function(err, user) {
+      
+      Profile.getGameList(id, function(err, profile) {
           if(err) {
               response = "There was a problem retrieving your game list. Please try again later.";
-          } else if(!user) {
+              return res.render('profile', { response: response });
+          } else if(profile.gamesOwned.length === undefined) {
               response = "It seems you have no games added. Why not try adding a game?";
+              return res.render('profile', { response: response });
+          } else {
+              return res.render('profile', { gamesList: profile.gamesOwned });
           }
-          res.render('profile', { response: response });
       });
   }
 });

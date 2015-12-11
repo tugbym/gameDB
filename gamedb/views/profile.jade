@@ -6,6 +6,17 @@ block scripts
 block content
   .main
     .container
-        h2=session.name.first + '\'\s games:'
-        h3=response
+        
+        if response
+          h3=response
+        else
+          table
+            tr
+              th
+                h2 Your games:
+            each game in gamesList
+              tr
+                td
+                  h4=game
+              
         a(href="add_game" class="btn btn-primary") Add a Game

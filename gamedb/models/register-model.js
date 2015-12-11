@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    Profile = require('../models/profile-model');
 
 var registrationSchema = new Schema({
     username: String,
@@ -29,9 +30,15 @@ module.exports.addNewUser = function(user, callback) {
         if(err) {
             return callback(err);
         }
-        return callback(null, {
-            response: "Successfully added one new user.",
-            user: result
+        
+        Profile.addNewProfile(result._id, user.username, function(err, profile) {
+            if(err) {
+                return callback(err);
+            }
+            return callback(null, {
+                response: "Successfully added one new user.",
+                user: result
+            });
         });
     });
 }

@@ -20,4 +20,14 @@ block content
       
       .results
         .container
-          p=results
+          if results
+            table
+              tr
+                th Search Results
+              each result, index in results
+                tr
+                  td
+                    form(name="add-game-form-#{index}" method='post')
+                      input(id='game' type='text' name="selected-game" value=result.title readonly)
+                      input(id='add' type='submit' value="Add Game")
+          p=message

@@ -1,3 +1,22 @@
+/* Games List */
+
+.main h2 {
+    text-align: center;
+}
+
+.main table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.main td {
+    text-align: center;
+}
+
+.main h4 {
+    padding: 10px;
+}
+
 /* Search Bar */
 
 .search span {
@@ -10,4 +29,42 @@
 
 .search input, option, select {
     color: black;
+}
+
+/* Results */
+
+.results table {
+    margin-top: 40px;
+    width: 100%;
+}
+
+.results th {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.results td {
+    padding: 20px;
+    color: #589983;
+}
+
+.results p {
+    padding: 10px;
+}
+
+#game {
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    width: 50%;
+}
+
+#add {
+    background-color: transparent;
+    border: 1px solid;
+    text-align: right;
+}
+
+#add:hover {
+    background-color: rgb(63, 63, 63);
 }

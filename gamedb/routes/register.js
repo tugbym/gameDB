@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
       if(err) {
           res.render('register', { result: 'There was an error submitting your registration. Please try again later.'});
       } else {
-      res.render('register', { result: 'You have been successfully registered.' });
+          res.render('register', { result: 'You have been successfully registered.' });
       }
   });
     
