@@ -11,14 +11,14 @@ router.get('/', function(req, res, next) {
       
      var err = new Error('You must be logged in to view this page.');
      err.status = 401;
-     next(err);
+     return next(err);
      
   } else {
       
       if(!req.session.passport['user']) {
         var err = new Error('You must be logged in to view this page.');
         err.status = 401;
-        next(err);
+        return next(err);
       }
       
       res.render('add_game');
@@ -27,62 +27,64 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  if (!req.session.passport) {
+    
+    if (!req.session.passport) {
       
-     var err = new Error('You must be logged in to view this page.');
-     err.status = 401;
-     next(err);
+       var err = new Error('You must be logged in to view this page.');
+       err.status = 401;
+       return next(err);
      
-  } else {
+    } else {
       
-      if(!req.session.passport['user']) {
-        var err = new Error('You must be logged in to view this page.');
-        err.status = 401;
-        next(err);
-      }
+        if(!req.session.passport['user']) {
+          var err = new Error('You must be logged in to view this page.');
+          err.status = 401;
+          return next(err);
+        }
       
-      //Search form submitted
-      if(req.body['search-query'] !== undefined) {
+        //Search form submitted
+        if(req.body['search-query'] !== undefined) {
           
-        var query = req.body['search-query'];
-        var searchBy = req.body['search-by'];
+          var query = req.body['search-query'];
+          var searchBy = req.body['search-by'];
       
-        query = query.replace(/ /g, '%20');
+          query = query.replace(/ /g, '%20');
       
-        var api_key = api.getApiKey;
-        var url = "http://www.giantbomb.com/api/search/?api_key=" + api_key + "&format=json&query=" + query + "&resources=" + searchBy;
+          var api_key = api.getApiKey;
+          var url = "http://www.giantbomb.com/api/search/?api_key=" + api_key + "&format=json&query=" + query + "&resources=" + searchBy;
       
-        request(url, function(err, response, body) {
-          if(err) {
-              return res.render('add_game', { message: err });
-          }
-          if(!err && response.statusCode === 200) {
+          request(url, function(err, response, body) {
+            if(err) {
+                return res.render('add_game', { message: err });
+            }
+            if(!err && response.statusCode === 200) {
               
               body = JSON.parse(body);
               
-              var noOfResults = body['number_of_total_results'],
-                  game,
-                  id,
+              var game,
+                  platforms,
                   results = {};
-                  
-              for(var i = 0; i<noOfResults; i++) {
-                  game = body['results'][i]['name'];
-                  id = body['results'][i]['id'];
-                  results[i] = { title: game, id: id };
-              }
-              
-              res.render('add_game', { results: results });
-              
-          }
-            
+                
+              body.results.forEach(function(result, i) {
+                  game = result.name;
+                  platforms = result.platforms;
+                  if(game && platforms) {
+                      results[i] = { title: game, platforms: platforms };
+                  }
+              });
+                
+              return res.render('add_game', { results: results });
+           }
         });
-      
+            
       //Add Game form submitted
       } else {
-          var game = req.body['selected-game'];
-          var id = req.session.passport.user._id;
+          var game = req.body['selected-game'],
+              console = req.body['selected-console'],
+              id = req.session.passport.user._id,
+              newGame = { title: game, console: console };
           
-          Profile.addGame(id, game, function(err, response) {
+          Profile.addGame(id, newGame, function(err, response) {
               if(err) {
                   return res.render('add_game', { message: err} );
               }

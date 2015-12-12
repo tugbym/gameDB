@@ -24,10 +24,12 @@ block content
             table
               tr
                 th Search Results
-              each result, index in results
-                tr
-                  td
-                    form(name="add-game-form-#{index}" method='post')
-                      input(id='game' type='text' name="selected-game" value=result.title readonly)
-                      input(id='add' type='submit' value="Add Game")
+              each result, index1 in results
+                each platform, index2 in result.platforms
+                  tr
+                    td
+                      form(name="add-game-form-#{index1}-#{index2}" method='post')
+                        input(id='game' type='text' name="selected-game" value=result.title readonly)
+                        input(id='console' type='text' name='selected-console' value=platform.abbreviation readonly)
+                        input(id='add' type='submit' value="Add Game")
           p=message

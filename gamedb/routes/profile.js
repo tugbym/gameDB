@@ -9,14 +9,14 @@ router.get('/', function(req, res, next) {
       
      var err = new Error('You must be logged in to view this page.');
      err.status = 401;
-     next(err);
+     return next(err);
      
   } else {
       
       if(!req.session.passport['user']) {
         var err = new Error('You must be logged in to view this page.');
         err.status = 401;
-        next(err);
+        return next(err);
       }
       
       var id = req.session.passport.user._id,
@@ -37,10 +37,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    var game = req.body['selected-game'];
-    var id = req.session.passport.user._id;
+    var game = req.body['selected-game'],
+        console = req.body['selected-console'],
+        id = req.session.passport.user._id,
+        gameToDelete = { title: game, console: console };
     
-    Profile.deleteGame(id, game, function(err, response) {
+    Profile.deleteGame(id, gameToDelete, function(err, response) {
         if(err) {
             response = "There was a problem deleting this game from your list. Please try again later.";
             return res.render('profile', { response: response });

@@ -14,7 +14,7 @@ var index = require('./routes/index'),
     logout = require('./routes/logout'),
     register = require('./routes/register'),
     profile = require('./routes/profile'),
-    add_game = require('./routes/add_game')
+    add_game = require('./routes/add_game');
 
 var app = express();
 mongoose.connect('mongodb://localhost/GameDB');

@@ -41,24 +41,24 @@ module.exports.getGameList = function(id, callback) {
     });
 }
 
-module.exports.addGame = function(id, game, callback) {
+module.exports.addGame = function(id, newGame, callback) {
     Profile.findOne({ 'userID': id }, function(err, user) {
         if(err) {
             return callback(err);
         } 
         if(!user) {
-            return callback(null, null);
+            return callback();
         }
         
         var gamesOwned = user.gamesOwned;
         
-        if(gamesOwned.indexOf(game) !== -1) {
-            return callback("You already have this game added.");
-        }
+        gamesOwned.forEach(function(gameOwned) {
+            if(gameOwned.title === newGame.title && gameOwned.console === newGame.console) {
+                return callback("You already have this game added.");
+            }
+        });
         
-        gamesOwned.push(game);
-        
-        console.log(gamesOwned);
+        gamesOwned.push(newGame);
         
         Profile.update({ 'userID': id }, { 'gamesOwned': gamesOwned }, function(err, update) {
             if(err) {
@@ -72,7 +72,7 @@ module.exports.addGame = function(id, game, callback) {
     });
 }
 
-module.exports.deleteGame = function(id, game, callback) {
+module.exports.deleteGame = function(id, gameToDelete, callback) {
     Profile.findOne({ 'userID': id }, function(err, user) {
         if(err) {
             return callback(err);
@@ -81,14 +81,13 @@ module.exports.deleteGame = function(id, game, callback) {
             return callback(null, null);
         }
         
-        var gamesOwned = user.gamesOwned,
-            pos = gamesOwned.indexOf(game);
+        var gamesOwned = user.gamesOwned;
         
-        if(pos === -1) {
-            return callback("This game does not exist in your collection.");
-        }
-        
-        gamesOwned.splice(pos, 1);
+        gamesOwned.forEach(function(gameOwned, index) {
+            if(gameOwned.title === gameToDelete.title && gameOwned.console === gameToDelete.console) {
+                gamesOwned.splice(index, 1);
+            }
+        });
         
         Profile.update({ 'userID': id }, { 'gamesOwned': gamesOwned }, function(err, update) {
             if(err) {

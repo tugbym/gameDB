@@ -25,11 +25,18 @@
     margin-top: 10px;
 }
 
-#game-collection {
+#game-in-collection, #console-in-collection {
     text-align: left;
     background-color: transparent;
     border: none;
+}
+
+#game-in-collection {
     width: 50%;
+}
+
+#console-in-collection {
+    width: 20%;
 }
 
 #delete {
@@ -77,11 +84,18 @@
     padding: 20px;
 }
 
-#game {
+#game, #console {
     text-align: center;
     background-color: transparent;
     border: none;
+}
+
+#game {
     width: 50%;
+}
+
+#console {
+    width: 20%;
 }
 
 #add {
