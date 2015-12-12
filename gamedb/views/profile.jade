@@ -12,11 +12,13 @@ block content
         else
           table
             tr
-              th
+              th(colspan="2")
                 h2 Your games:
             each game in gamesList
               tr
                 td
-                  h4=game
+                  form(name="delete-game-form-#{index}" method='post')
+                    input(id='game-collection' type='text' name="selected-game" value=game readonly)
+                    input(id='delete' type='submit' value="Remove Game")
               
         a(href="add_game" class="btn btn-primary") Add a Game

@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
           if(err) {
               response = "There was a problem retrieving your game list. Please try again later.";
               return res.render('profile', { response: response });
-          } else if(profile.gamesOwned.length === undefined) {
+          } else if(profile.gamesOwned.length === undefined || profile.gamesOwned.length === 0) {
               response = "It seems you have no games added. Why not try adding a game?";
               return res.render('profile', { response: response });
           } else {
@@ -34,6 +34,19 @@ router.get('/', function(req, res, next) {
           }
       });
   }
+});
+
+router.post('/', function(req, res, next) {
+    var game = req.body['selected-game'];
+    var id = req.session.passport.user._id;
+    
+    Profile.deleteGame(id, game, function(err, response) {
+        if(err) {
+            response = "There was a problem deleting this game from your list. Please try again later.";
+            return res.render('profile', { response: response });
+        }
+        res.redirect('/profile');
+    });
 });
 
 module.exports = router;

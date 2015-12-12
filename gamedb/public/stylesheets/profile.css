@@ -9,12 +9,33 @@
     margin-bottom: 20px;
 }
 
-.main td {
+.main th {
     text-align: center;
+}
+
+.main td {
+    padding: 5px;
 }
 
 .main h4 {
     padding: 10px;
+}
+
+#game-collection {
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    width: 50%;
+}
+
+#delete {
+    text-align: right;
+    background-color: transparent;
+    border: 1px solid;
+}
+
+#delete:hover {
+    background-color: rgb(63, 63, 63);
 }
 
 /* Search Bar */

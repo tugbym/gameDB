@@ -65,10 +65,38 @@ module.exports.addGame = function(id, game, callback) {
                 return callback(err);
             }
             return callback(null, {
-                response: 'Successfully added game.',
-                user: update
+                response: 'Successfully added game.'
             });
         });
         
+    });
+}
+
+module.exports.deleteGame = function(id, game, callback) {
+    Profile.findOne({ 'userID': id }, function(err, user) {
+        if(err) {
+            return callback(err);
+        }
+        if(!user) {
+            return callback(null, null);
+        }
+        
+        var gamesOwned = user.gamesOwned,
+            pos = gamesOwned.indexOf(game);
+        
+        if(pos === -1) {
+            return callback("This game does not exist in your collection.");
+        }
+        
+        gamesOwned.splice(pos, 1);
+        
+        Profile.update({ 'userID': id }, { 'gamesOwned': gamesOwned }, function(err, update) {
+            if(err) {
+                return callback(err);
+            }
+            return callback(null, {
+                response: 'Successfully deleted game.'
+            });
+        }); 
     });
 }
