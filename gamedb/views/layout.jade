@@ -2,25 +2,28 @@ doctype html
 html
   head
     title GameDB
+    link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Orbitron")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='stylesheet', href='/stylesheets/global.css')
     block scripts
   body
-    .nav
-      .container
-        h2 GamesDB
-        ul
-          if !session
-            li
-              a(href="login") Login
-            li 
-              a(href="register") Register
-          else
-            li
-              a(href="profile")=session.name.first
-            li
-              a(href="logout") Logout
-  block content
-    .footer
-      .container
-        p &copy; Michael Tugby. Created in 2015.
+    .wrapper
+      .nav
+        .container
+          h2
+            a(href="/") GamesDB
+          ul
+            if !session
+              li
+                a(href="login") Login
+              li 
+                a(href="register") Register
+            else
+              li
+                a(href="profile")=session.name.first
+              li
+                a(href="logout") Logout
+      block content
+      .footer
+        .container
+          p &copy; Michael Tugby. Created in 2015.

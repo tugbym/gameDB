@@ -1,20 +1,29 @@
 extends layout
 
-block content
-  .jumbotron 
-    .container
-      h1 We help you to keep track of all the games in your collection.
-      a(href="register" class="btn btn-danger") Sign Up
+block scripts
+  link(rel='stylesheet', href='/stylesheets/main.css')
 
+block content
   .main
-    .container
-      .row
-        .col-md-4
-          h2 Game Suggestions
-          p Our software will suggest similar games to you from the games you have entered into your list.
-        .col-md-4
-          h2 Easy to Use
-          p Simply just type in the game you want to add to your list, and it will be instantly added.
-        .col-md-4
-          h2 Share
-          p Add Friends to your profile, and you can see what games you have in common.
+    .jumbotron 
+      .container
+        h1 We help you to keep track of all the games in your collection.
+        a(href="register" class="btn btn-danger") Sign Up
+
+    .information
+      .container
+        table
+          tr
+            th
+              h2 Game Suggestions
+            th
+              h2 Easy to Use
+            th
+              h2 Share
+          tr
+            td
+              p Our software will suggest similar games to you from the games you have entered into your list.
+            td
+              p Simply just type in the game you want to add to your list, and it will be instantly added.
+            td
+              p Add Friends to your profile, and you can see what games you have in common.

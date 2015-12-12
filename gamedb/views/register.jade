@@ -6,25 +6,39 @@ block scripts
 block content
   .main
     .container
-      h2 Registration Form
+      h2 Become a Member
       form(name='registration-form', method='post')
-        .input
-          span Username
-          input(type="text" name="username")
-        .input
-          span Password
-          input(type="password" name="password")
-        .input
-          span First Name
-          input(type="text" name="first-name")
-        .input
-          span Surname
-          input(type="text" name="last-name")
-        .input
-          span Date of Birth
-          input(type="date" name="date-of-birth")
-        .input
-          span Email Address
-          input(type="email" name="email-address")
-        .input
-          input(type="submit" value="Submit")
+        table
+          tr(class="input")
+            td 
+              span Username
+            td
+              input(type="text" name="username")          
+          tr(class="input")
+            td 
+              span Password
+            td
+              input(type="password" name="password")
+          tr(class="input")
+            td 
+              span First Name
+            td
+              input(type="text" name="first-name")
+          tr(class="input")
+            td 
+              span Surname
+            td
+              input(type="text" name="last-name")
+          tr(class="input")
+            td 
+              span Date of Birth
+            td
+              input(type="date" name="date-of-birth")
+          tr(class="input")
+            td
+              span Email Address
+            td
+              input(type="email" name="email-address")
+          tr(class="submit")
+            td(colspan="2")
+              input(type="submit" value="Submit")

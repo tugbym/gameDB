@@ -1,49 +1,8 @@
-body {
-    background-color: black;
-    color: white;
-    font-family: Arial, Verdana, sans-serif;
-}
-
-.container {
-    max-width: 950px;
-    margin: 0 auto;
-}
-
-/* Navigation */
-
-.nav .container {
-    padding: 20px;
-}
-
-.nav h2 {
-    margin: 0;
-    padding: 0;
-    float: left;
-}
-
-.nav ul {
-    float: right;
-    list-style: none;
-}
-
-.nav li {
-    display: inline;
-    padding: 0 20px;
-}
-
-.nav a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-}
-
-.nav a:hover {
-    color: #c9d1d6;
-}
-
 /* Jumbotron */
 
 .jumbotron {
+    margin-bottom: 100px;
+    color: white;
     height: 500px;
     background-color: transparent;
     background: url("http://bc-gb.com/wp-content/uploads/2013/10/gaming-wallpapers-games-291.jpg") no-repeat center center;
@@ -59,19 +18,32 @@ body {
     padding: 10px 30px;
 }
 
-/* Main */
+/* Information */
 
-.main {
+.information {
+    color: white;
     text-align: center;
-    padding: 100px;
 }
 
-.main h2 {
-    padding: 10px;
+.information table {
+    background-color: #FBAB52;
+    width: 100%;
+    border-radius: 20px;
 }
 
-/* Footer */
+.information th {
+    padding: 20px 20px 0 20px;
+}
 
-.footer {
-    text-align: left;
+.information td {
+    padding: 0 20px 20px 20px;
+}
+
+.information h2 {
+    text-align: center;
+    text-shadow: 2px 2px black;
+}
+
+.information p {
+    color: black;
 }

@@ -8,11 +8,17 @@ block content
     .container
       h2 Login
       form(name='login-form', method='post')
-        .input
-          span Username
-          input(type="text" name="username")
-        .input
-          span Password
-          input(type="password" name="password")
-        .input
-          input(type="submit" value="Submit")
+        table
+          tr(class="input")
+            td
+              span Username
+            td
+              input(type="text" name="username")
+          tr(class="input")
+            td
+              span Password
+            td
+              input(type="password" name="password")
+          tr(class="submit")
+            td(colspan="2")
+              input(type="submit" value="Submit")
