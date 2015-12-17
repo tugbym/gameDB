@@ -47,7 +47,7 @@ body {
 
 .nav .container {
     text-align: center;
-    padding: 20px;
+    padding: 20px 0;
     background-color: #FBAB52;
     border-radius: 10px;
     margin-bottom: 100px;
@@ -56,6 +56,7 @@ body {
 .nav ul {
     list-style: none;
     margin: 0;
+    padding: 0;
 }
 
 .nav li {

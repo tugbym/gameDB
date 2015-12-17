@@ -2,10 +2,10 @@
 
 @keyframes movedown {
     from {
-        margin-top: 10px;
+        top: 0px;
     }
     to {
-        margin-top: 20px;
+        top: 20px;
     }
 }
 
@@ -13,22 +13,26 @@
 
 .jumbotron {
     color: white;
-    height: 600px;
-    width: 1280px;
     display: block;
     margin: 0 auto;
     background-color: transparent;
     background: url("../images/jumbotron.jpg") no-repeat center center;
+    background-size: cover;
 }
 
 .jumbotron .container {
-    margin-top: 250px;
+    margin-top: 10vw;
     text-align: center;
 }
 
+.jumbotron h1 {
+    font-size: 4vw;
+}
+
 .jumbotron a {
-    margin-top: 30px;
-    padding: 10px 30px;
+    margin-top: .5vw;
+    padding: 1vw 3vw;
+    font-size: 2vw;
 }
 
 .jumbotron img {
@@ -43,9 +47,10 @@
 }
 
 .arrow .down {
-    margin-top: 10px;
+    position: relative;
+    margin-top: .5vw;
     border: solid white;
-    border-width: 0 .4em .4em 0;
+    border-width: 0 .4vw .4vw 0;
     display: inline-block;
     padding: .60em;
     transform: rotate(45deg);
@@ -62,11 +67,6 @@
 
 div[class^="information"] {
     margin-top: 60px;
-}
-
-div[class^="information"] h2 {
-    text-align: center;
-    padding: 20px;
 }
 
 div[class^="information"] p {
@@ -90,9 +90,72 @@ div[class^="information"] p {
 
 .information2 p {
     padding-top: 55px;
-    text-align: right;
 }
 
 .information3 p {
     padding-top: 45px;
+}
+
+/* Desktop Only */
+
+@media (min-width:1281px) {
+    
+    .jumbotron {
+        width: 1280px;
+        height: 600px;
+        background-size: contain;
+    }
+    
+    .jumbotron .container {
+        margin-top: 250px;
+    }
+    
+    .jumbotron h1 {
+        font-size: 50px;
+    }
+    
+    .jumbotron a {
+        margin-top: 10px;
+        padding: 10px 30px;
+    }
+    
+    .information2 p {
+        text-align: right;
+    }
+    
+    .arrow .down {
+        margin-top: 10px;
+        border-width: 0 .4em .4em 0;
+    }
+    
+    div[class^="information"] h2 {
+        text-align: center;
+        padding: 20px;
+    }
+    
+}
+
+/* Tablet Only */
+
+@media (min-width:801px) {
+    
+    .jumbotron a {
+        font-size: 16px;
+    }
+    
+}
+
+/* Mobile Only */
+
+@media (min-width:320px) {
+    
+    div[class^="information"] {
+        text-align: center;
+    }
+    
+    div[class^="information"] h2 {
+        text-align: center;
+        padding: 0px;
+    }
+    
 }
