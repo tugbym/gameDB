@@ -4,26 +4,43 @@ html
     title GameDB
     link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Orbitron")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+    link(rel="stylesheet", href="/stylesheets/socialmedia.css")
     link(rel='stylesheet', href='/stylesheets/global.css')
     block scripts
   body
     .wrapper
-      .nav
-        .container
-          h2
-            a(href="/") GamesDB
-          ul
-            if !session
+      .header
+        .logo
+          .container
+            a(href="/")
+              img(src="../images/logo.png" height="49" width="230")
+        .nav
+          .container
+            ul
               li
-                a(href="login") Login
-              li 
-                a(href="register") Register
-            else
+                a(href="about") About
+                span |
               li
-                a(href="profile")=session.name.first
-              li
-                a(href="logout") Logout
+                a(href="contact") Contact
+                span |
+              if !session
+                li
+                  a(href="login") Login
+                  span |
+                li 
+                  a(href="register") Register
+              else
+                li
+                  a(href="profile")=session.name.first
+                  span |
+                li
+                  a(href="logout") Logout
       block content
       .footer
         .container
+          a(class="btn btn-social-icon btn-facebook")
+            span(class="fa fa-facebook")
+          a(class="btn btn-social-icon btn-twitter")
+            span(class="fa fa-twitter")
           p &copy; Michael Tugby. Created in 2015.

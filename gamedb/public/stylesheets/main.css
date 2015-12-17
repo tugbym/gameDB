@@ -1,15 +1,28 @@
+/* Animations */
+
+@keyframes movedown {
+    from {
+        margin-top: 10px;
+    }
+    to {
+        margin-top: 20px;
+    }
+}
+
 /* Jumbotron */
 
 .jumbotron {
-    margin-bottom: 100px;
     color: white;
-    height: 500px;
+    height: 600px;
+    width: 1280px;
+    display: block;
+    margin: 0 auto;
     background-color: transparent;
-    background: url("http://bc-gb.com/wp-content/uploads/2013/10/gaming-wallpapers-games-291.jpg") no-repeat center center;
+    background: url("../images/jumbotron.jpg") no-repeat center center;
 }
 
 .jumbotron .container {
-    padding-top: 75px;
+    margin-top: 250px;
     text-align: center;
 }
 
@@ -18,32 +31,68 @@
     padding: 10px 30px;
 }
 
-/* Information */
+.jumbotron img {
+    display: block;
+    margin: 0 auto;
+    padding: 20px 0;
+    fill: white;
+}
 
-.information {
-    color: white;
+.arrow {
+    cursor: pointer;
+}
+
+.arrow .down {
+    margin-top: 10px;
+    border: solid white;
+    border-width: 0 .4em .4em 0;
+    display: inline-block;
+    padding: .60em;
+    transform: rotate(45deg);
+}
+
+.down:hover {
+    animation-name: movedown;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Information Globals */
+
+div[class^="information"] {
+    margin-top: 60px;
+}
+
+div[class^="information"] h2 {
     text-align: center;
+    padding: 20px;
 }
 
-.information table {
-    background-color: #FBAB52;
-    width: 100%;
-    border-radius: 20px;
+div[class^="information"] p {
+    line-height: 25px;
 }
 
-.information th {
-    padding: 20px 20px 0 20px;
+#pic, #icon {
+    display: block;
+    margin: 0 auto;
 }
 
-.information td {
-    padding: 0 20px 20px 20px;
+#icon {
+    margin-top: 20px;
 }
 
-.information h2 {
-    text-align: center;
-    text-shadow: 2px 2px black;
-}
+/* Information Individuals */
 
 .information p {
-    color: black;
+    padding-top: 60px;
+}
+
+.information2 p {
+    padding-top: 55px;
+    text-align: right;
+}
+
+.information3 p {
+    padding-top: 45px;
 }

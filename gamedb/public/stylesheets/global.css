@@ -1,3 +1,5 @@
+/* Globals */
+
 body {
     background-color: black;
     color: white;
@@ -19,37 +21,48 @@ body {
     padding-bottom: 100px;
 }
 
+/* Animations */
+
+@keyframes hover {
+    from {
+        color: white;
+    }
+    to {
+        color: #AAA39B;
+    }
+}
+
+/* Header */
+
+.header .container img {
+    margin: 0 auto;
+    display: block;
+}
+
+.header .logo {
+    margin: 30px 0;
+}
+
 /* Navigation */
 
 .nav .container {
+    text-align: center;
     padding: 20px;
     background-color: #FBAB52;
     border-radius: 10px;
     margin-bottom: 100px;
 }
 
-.nav h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 23px;
-	font-weight: 500;
-	line-height: 23px;
-    text-shadow: 2px 2px black;
-    float: left;
-}
-
-.nav h2 a {
-    text-decoration: none;
-    color: white;
-}
-
 .nav ul {
-    float: right;
     list-style: none;
+    margin: 0;
 }
 
 .nav li {
     display: inline;
+}
+
+.nav span {
     padding: 0 20px;
 }
 
@@ -64,7 +77,9 @@ body {
 }
 
 .nav a:hover {
-    color: #AAA39B;
+    animation-name: hover;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }
 
 /* Footer */
@@ -76,4 +91,8 @@ body {
     bottom: 0;
     left: 0;
     text-align: center;
+}
+
+.footer a {
+    margin: 10px;
 }

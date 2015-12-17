@@ -2,6 +2,7 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/main.css')
+  script(src="/javascripts/main.js")
 
 block content
   .main
@@ -10,21 +11,33 @@ block content
         h1 We help you to keep track of all the games in your collection.
         if !session
           a(href="register" class="btn btn-danger") Sign Up
+        .arrow
+          .down
 
     .information
       .container
-        table
-          tr
-            th
-              h2 Game Suggestions
-            th
-              h2 Easy to Use
-            th
-              h2 Share
-          tr
-            td
-              p Our software will suggest similar games to you from the games you have entered into your list.
-            td
-              p Simply just type in the game you want to add to your list, and it will be instantly added.
-            td
-              p Add Friends to your profile, and you can see what games you have in common.
+        h2 How It Works
+        .row
+          .col-md-6
+            p You can search for games using our search form. We use Giantbomb’s API to retrieve a database of video games. Simply click “Add Game” to the game you want to add, and it will be added to your collection on your profile. It’s that simple!
+          .col-md-6 
+            img(id="pic" src="../images/pic1.jpg")
+        img(id="icon" src="../images/icon1.svg")
+    
+    .information2
+      .container
+        .row
+          .col-md-7
+            img(id="pic" src="../images/pic2.jpg")
+            img(id="icon" src="../images/icon2.svg")
+          .col-md-5
+            p You may add certain statistics to each game in your collection. These include such things as: Achievements Your Progress Things to Do Your Rating Your Review All games can be grouped into a “Currently playing” and “Finished playing” section. You can add friends to your profile, and browse their collections too!
+        
+    .information3
+      .container
+        .row
+          .col-md-6
+            p You will also be given recommendations for different games for you to try out based on those that are in your collection. This could help you to discover a new game you like that you never even knew existed! Any games that you do not own, but wish to can be added to your own wishlist. All of this can be shared through Facebook and Twitter, to your friends on those sites, so that they can see what games you are playing.
+          .col-md-6
+            img(id="pic" src="../images/pic3.jpg")
+            img(id="icon" src="../images/icon3.svg")
