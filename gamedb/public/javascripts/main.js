@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
     document.getElementsByClassName("arrow")[0].addEventListener("click", function() {
-        window.scroll(0, 900);
+        var ypos = document.getElementsByClassName("information")[0].getBoundingClientRect().top;
+        window.scroll(0, ypos);
     });
 });
