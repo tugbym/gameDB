@@ -8,20 +8,40 @@
 }
 
 .main table {
-    width: 40%;
+    width: 45%;
     margin: 20px auto;
 }
 
-.main .input input {
+.main .input {
     width: 80%;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 
-.main .submit td {
-    padding-top: 10px;
+.main .input:focus {
+    outline-color: orange;
+}
+
+.main .input:valid {
+    border-color: #2ECC71;
+    color: #2ECC71;
+    
+}
+
+.main .input:invalid {
+    border-color: #E74C3C;
+    color: #E74C3C;
+}
+
+.main .glyphicon {
+    padding: 0 10px;
+    margin: 0;
+}
+
+.main .submit {
+    display: block;
+    margin: 10px auto 0px auto;
     text-align: center;
-}
-
-.main .submit input {
     background-color: #B85349;
     border: 1px solid black;
     box-shadow: 2px 2px 2px black;
@@ -29,7 +49,7 @@
     color: white;
 }
 
-.main .submit input:hover {
+.main .submit:hover {
     background-color: white;
     color: black;
 }
@@ -40,11 +60,15 @@
 }
 
 .main span {
-    padding: 20px;
+    padding: 10px;
     text-shadow: 2px 2px black;
 }
 
-.main h2 {
+.main h2, p {
     text-align: center;
     text-shadow: 2px 2px black;
+}
+
+.main p {
+    padding: 5px 0;
 }

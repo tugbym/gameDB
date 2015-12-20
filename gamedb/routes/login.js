@@ -6,14 +6,14 @@ var passport = require('passport');
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('login');
+    var err = req.flash().error;
+    res.render('login', { error: err });
 });
 
 router.post('/',
-            passport.authenticate('local', { successRedirect: '/',
+            passport.authenticate('local', { successRedirect: '/profile',
                                              failureRedirect: '/login',
-                                             failureFlash: true,
-                                             successFlash: 'You have successfully logged in!'})    
+                                             failureFlash: true})
 );
 
 module.exports = router;

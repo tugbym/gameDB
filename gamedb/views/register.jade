@@ -2,6 +2,7 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/register.css')
+  script(src="/javascripts/register.js")
 
 block content
   .main
@@ -9,36 +10,43 @@ block content
       h2 Become a Member
       form(name='registration-form', method='post')
         table
-          tr(class="input")
+          tr
             td 
               span Username
             td
-              input(type="text" name="username")          
-          tr(class="input")
+              input(type="text" class="input" name="username" minlength="6" maxlength="20" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td 
               span Password
             td
-              input(type="password" name="password")
-          tr(class="input")
+              input(type="password" class="input" name="password" minlength="6" maxlength="20" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td 
               span First Name
             td
-              input(type="text" name="first-name")
-          tr(class="input")
+              input(type="text" class="input" name="first-name" minlength="2" maxlength="20" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td 
               span Surname
             td
-              input(type="text" name="last-name")
-          tr(class="input")
+              input(type="text" class="input" name="last-name" minlength="2" maxlength="20" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td 
               span Date of Birth
             td
-              input(type="date" name="date-of-birth")
-          tr(class="input")
+              input(type="date" class="input" name="date-of-birth" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td
               span Email Address
             td
-              input(type="email" name="email-address")
-          tr(class="submit")
+              input(type="text" class="input" name="email-address" maxlength="30" pattern="[a-z0-9._%+-]+[@]+[a-z0-9.-]+[.]+[a-z]{2,3}$" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td(colspan="2")
-              input(type="submit" value="Submit")
+              input(type="submit" class="submit" value="Submit")
+      p=result

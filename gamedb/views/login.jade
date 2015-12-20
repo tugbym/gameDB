@@ -2,6 +2,7 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/register.css')
+  script(src="/javascripts/register.js")
 
 block content
   .main
@@ -9,16 +10,20 @@ block content
       h2 Login
       form(name='login-form', method='post')
         table
-          tr(class="input")
+          tr
             td
               span Username
             td
-              input(type="text" name="username")
-          tr(class="input")
+              input(class="input" type="text" name="username" minlength="6" maxlength="20" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td
               span Password
             td
-              input(type="password" name="password")
-          tr(class="submit")
+              input(class="input" type="password" name="password" minlength="6" maxlength="20" required)
+              span(class="glyphicon glyphicon-exclamation-sign")
+          tr
             td(colspan="2")
-              input(type="submit" value="Submit")
+              input(class="submit" type="submit" value="Submit")
+      if error
+        p=error
