@@ -1,4 +1,4 @@
-/* Games List */
+/* Games Table */
 
 .main {
     text-align: center;
@@ -25,6 +25,8 @@
     margin-top: 10px;
 }
 
+/* Games */
+
 #game-in-collection, #console-in-collection {
     text-align: left;
     background-color: transparent;
@@ -39,14 +41,57 @@
     width: 20%;
 }
 
-#delete {
-    text-align: right;
+.button {
     background-color: transparent;
     border: 1px solid;
+    padding: 3px;
 }
 
-#delete:hover {
+#show-extras {
+    margin-right: 10px;
+}
+
+.button:hover {
     background-color: rgb(63, 63, 63);
+    cursor: pointer;
+}
+
+#edit-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+/* Games Info */
+
+.edit, #edit-submit {
+    display: none;
+}
+
+.edit p {
+    padding-top: 5px;
+    text-align: right;
+}
+
+.edit input {
+    outline: none;
+    border: 1px solid;
+    border-radius: 5px;
+    width: 50px;
+    color: black;
+}
+
+.edit input:disabled {
+    border: 1px solid grey;
+}
+
+.edit span {
+    padding: 5px;
+}
+
+.edit ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 /* Search Bar */

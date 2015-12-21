@@ -2,7 +2,6 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/register.css')
-  script(src="/javascripts/register.js")
 
 block content
   .main
@@ -15,13 +14,11 @@ block content
               span Username
             td
               input(class="input" type="text" name="username" minlength="6" maxlength="20" required)
-              span(class="glyphicon glyphicon-exclamation-sign")
           tr
             td
               span Password
             td
               input(class="input" type="password" name="password" minlength="6" maxlength="20" required)
-              span(class="glyphicon glyphicon-exclamation-sign")
           tr
             td(colspan="2")
               input(class="submit" type="submit" value="Submit")

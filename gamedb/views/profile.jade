@@ -2,24 +2,65 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/profile.css')
+  script(src='/javascripts/profile.js')
 
 block content
   .main
     .container
-        
-        if response
-          h3=response
-        else
-          table
-            tr
-              th(colspan="2")
-                h3 Your games:
-            each game in gamesList
-              tr
-                td
-                  form(name="delete-game-form-#{index}" method='post')
-                    input(id='game-in-collection' type='text' name="selected-game" value=game.title readonly)
-                    input(id='console-in-collection' type='text' name='selected-console' value=game.console readonly)
-                    input(id='delete' type='submit' value="Remove Game")
+      if response
+        h3=response
+      else
+        each game, index in gamesList
+          fieldset
+            form(name="game-form-#{index}" method='post')
+              table
+                tr
+                  th(colspan="4")
+                    h3 Your games:
+                tr
+                  td
+                    span(id="edit-toggle" class="glyphicon glyphicon-pencil")
+                      td
+                        input(id='game-in-collection' type='text' name="selected-game" value=game.title readonly)
+                      td
+                        input(id='console-in-collection' type='text' name='selected-console' value=game.console readonly)
+                      td
+                        span(id='show-extras' class='button') Show Statistics
+                        span(id='remove-game' class='button') Remove Game
+                tr(class="edit")
+                  td(colspan="2")
+                    p Achievements
+                  td(colspan="2")
+                    input(type='number' class="editable-item" name='achievements-completed' disabled)
+                    span /
+                    input(type='number' class="editable-item" name='achievements-total' disabled)
+                tr(class="edit")
+                  td(colspan="2")
+                    p Currently At
+                  td(colspan="2")
+                    textarea(name='current-progress' class="editable-item" disabled)
+                tr(class="edit")
+                  td(colspan="2")
+                    p Things to Do
+                  td(colspan="2")
+                    textarea(name='to-do' class="editable-item" disabled)
+                tr(class="edit")
+                  td(colspan="2")
+                    p Your Rating
+                  td(colspan="2")
+                    ul
+                      li(class="glyphicon glyphicon-star-empty")
+                      li(class="glyphicon glyphicon-star-empty")
+                      li(class="glyphicon glyphicon-star-empty")
+                      li(class="glyphicon glyphicon-star-empty")
+                      li(class="glyphicon glyphicon-star-empty")
+                tr(class="edit")
+                  td(colspan="2")
+                    p Your Review
+                  td(colspan="2")
+                    textarea(name='your-review' class="editable-item" disabled)
+                tr(id="edit-submit")
+                  td(colspan="4")
+                    span(id='make-changes' class='button') Make Changes
               
-        a(href="add_game" class="btn btn-primary") Add a Game
+      a(href="add_game" class="btn btn-primary") Add a Game

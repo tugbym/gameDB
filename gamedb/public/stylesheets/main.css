@@ -85,16 +85,26 @@ div[class^="information"] p {
 
 /* Information Individuals */
 
-.information p {
+.information p:first-child {
     padding-top: 60px;
 }
 
-.information2 p {
-    padding-top: 55px;
+.information2 p:first-child {
+    padding-top: 18px;
 }
 
-.information3 p {
-    padding-top: 45px;
+.information2 table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.information2 span {
+    padding-left: 10px;
+}
+
+.information3 p:first-child {
+    padding-top: 30px;
 }
 
 /* Mobile Only */
