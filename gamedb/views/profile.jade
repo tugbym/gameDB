@@ -17,7 +17,7 @@ block content
               table
                 tr
                   td
-                    span(class="glyphicon glyphicon-pencil edit-toggle edit-toggle-#{index}")
+                    span(class="glyphicon glyphicon-pencil edit-toggle-off edit-toggle-#{index}")
                       td
                         input(id='game-in-collection' type='text' name="selected-game" value=game.title readonly)
                       td
@@ -51,11 +51,11 @@ block content
                     p Your Rating
                   td(colspan="2")
                     ul
-                      li(class="glyphicon glyphicon-star-empty")
-                      li(class="glyphicon glyphicon-star-empty")
-                      li(class="glyphicon glyphicon-star-empty")
-                      li(class="glyphicon glyphicon-star-empty")
-                      li(class="glyphicon glyphicon-star-empty")
+                      li(class="glyphicon glyphicon-star-empty star star-1")
+                      li(class="glyphicon glyphicon-star-empty star star-2")
+                      li(class="glyphicon glyphicon-star-empty star star-3")
+                      li(class="glyphicon glyphicon-star-empty star star-4")
+                      li(class="glyphicon glyphicon-star-empty star star-5")
                 tr(class="edit edit-#{index}")
                   td(colspan="2")
                     p Your Review

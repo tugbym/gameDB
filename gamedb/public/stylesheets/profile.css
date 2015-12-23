@@ -60,8 +60,12 @@
     cursor: pointer;
 }
 
-.edit-toggle {
+.edit-toggle-off {
     display: none;
+}
+
+.edit-toggle-on {
+    display: block;
     cursor: pointer;
 }
 
