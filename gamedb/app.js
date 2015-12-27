@@ -36,6 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+// Pass session data through to the front end on each request
 app.use(function(req, res, next) {
     if(req.session.passport !== undefined) {
         if(req.session.passport['user'] ) {
@@ -44,6 +45,14 @@ app.use(function(req, res, next) {
     }
     next();
 })
+
+// Log form data
+if (app.get('env') === 'development') {
+    app.use(function (req, res, next) {
+        console.log(req.body);
+        next();
+    });
+}
 
 app.use('/', index);
 app.use('/login', login);

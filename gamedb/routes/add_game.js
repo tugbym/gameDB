@@ -82,7 +82,13 @@ router.post('/', function(req, res, next) {
           var game = req.body['selected-game'],
               console = req.body['selected-console'],
               id = req.session.passport.user._id,
-              newGame = { title: game, console: console };
+              newGame = { title: game,
+                          console: console, 
+                          achievements: { completed: '', total: '' }, 
+                          currentProgress: '', 
+                          toDo: '',
+                          stars: '',
+                          review: '' };
           
           Profile.addGame(id, newGame, function(err, response) {
               if(err) {

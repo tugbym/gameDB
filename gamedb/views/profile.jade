@@ -33,36 +33,39 @@ block content
                   td(colspan="2")
                     p Achievements
                   td(colspan="2")
-                    input(type='number' class="editable-item editable-item-#{index}" name='achievements-completed' disabled)
+                    input(name='achievements-completed' type='number' class="editable-item editable-item-#{index}" value=game.achievements.completed disabled)
                     span /
-                    input(type='number' class="editable-item editable-item-#{index}" name='achievements-total' disabled)
+                    input(name='achievements-total' type='number' class="editable-item editable-item-#{index}" value=game.achievements.total disabled)
                 tr(class="edit edit-#{index}")
                   td(colspan="2")
                     p Currently At
                   td(colspan="2")
-                    textarea(name='current-progress' class="editable-item editable-item-#{index}" disabled)
+                    textarea(name='current-progress' class="editable-item editable-item-#{index}" disabled) #{game.currentProgress}
                 tr(class="edit edit-#{index}")
                   td(colspan="2")
                     p Things to Do
                   td(colspan="2")
-                    textarea(name='to-do' class="editable-item editable-item-#{index}" disabled)
+                    textarea(name='to-do' class="editable-item editable-item-#{index}" disabled) #{game.toDo}
                 tr(class="edit edit-#{index}")
                   td(colspan="2")
                     p Your Rating
                   td(colspan="2")
-                    ul
-                      li(class="glyphicon glyphicon-star-empty star star-1")
-                      li(class="glyphicon glyphicon-star-empty star star-2")
-                      li(class="glyphicon glyphicon-star-empty star star-3")
-                      li(class="glyphicon glyphicon-star-empty star star-4")
-                      li(class="glyphicon glyphicon-star-empty star star-5")
+                    ul(id='star-list-#{index}')
+                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-1")
+                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-2")
+                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-3")
+                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-4")
+                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-5")
+                      input(name='your-rating' id="star-rating-#{index}" class="editable-item editable-item-#{index}" type='hidden' value=game.stars disabled)
                 tr(class="edit edit-#{index}")
                   td(colspan="2")
                     p Your Review
                   td(colspan="2")
-                    textarea(name='your-review' class="editable-item editable-item-#{index}" disabled)
+                    textarea(name='your-review' class="editable-item editable-item-#{index}" disabled) #{game.review}
                 tr(class="edit-submit  edit-submit-#{index}")
                   td(colspan="4")
+                    input(type='hidden' class="editable-item editable-item-#{index}" name="selected-game-to-edit" value=game.title disabled)
+                    input(type='hidden' class="editable-item editable-item-#{index}" name='selected-console-to-edit' value=game.console disabled)
                     input(id='make-changes' type='submit' class='button' value='Make Changes')
               
       a(href="add_game" class="btn btn-primary") Add a Game

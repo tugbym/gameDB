@@ -78,7 +78,7 @@ module.exports.deleteGame = function(id, gameToDelete, callback) {
             return callback(err);
         }
         if(!user) {
-            return callback(null, null);
+            return callback();
         }
         
         var gamesOwned = user.gamesOwned;
@@ -97,5 +97,33 @@ module.exports.deleteGame = function(id, gameToDelete, callback) {
                 response: 'Successfully deleted game.'
             });
         }); 
+    });
+}
+
+module.exports.editGameInfo = function(id, gameInfo, callback) {
+    Profile.findOne({ 'userID': id }, function(err, user) {
+        if(err) {
+            return callback(err);
+        }
+        if(!user) {
+            return callback();
+        }
+        
+        var gamesOwned = user.gamesOwned;
+        
+        gamesOwned.forEach(function(gameOwned, index) {
+            if(gameOwned.title === gameInfo.title && gameOwned.console === gameInfo.console) {
+                gamesOwned[index] = gameInfo;
+            }
+        });
+        
+        Profile.update({ 'userID': id}, { 'gamesOwned': gamesOwned }, function(err, update) {
+            if(err) {
+                return callback(err);
+            }
+            return callback(null, {
+                response: 'Successfully edited game info'
+            });
+        });        
     });
 }
