@@ -5,37 +5,38 @@ html
     link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Orbitron")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
-    link(rel="stylesheet", href="/stylesheets/socialmedia.css")
     link(rel='stylesheet', href='/stylesheets/global.css')
+    link(rel='stylesheet', href='/stylesheets/social.css')
     block scripts
   body
     .wrapper
       .header
-        .logo
-          .container
-            a(href="/")
-              img(src="../images/logo.png" height="49" width="230")
-        .nav
-          .container
-            ul
-              li
-                a(href="about") About
-                span |
-              li
-                a(href="contact") Contact
-                span |
-              if !session
+        .container
+          .logo
+            .container
+              a(href="/")
+                img(src="../images/logo.png" height="49" width="230")
+          .nav
+            .container
+              ul
                 li
-                  a(href="login") Login
-                  span |
-                li 
-                  a(href="register") Register
-              else
-                li
-                  a(href="profile")=session.name.first
+                  a(href="about") About
                   span |
                 li
-                  a(href="logout") Logout
+                  a(href="contact") Contact
+                  span |
+                if !session
+                  li
+                    a(href="login") Login
+                    span |
+                  li 
+                    a(href="register") Register
+                else
+                  li
+                    a(href="profile")=session.name.first
+                    span |
+                  li
+                    a(href="logout") Logout
       block content
       .footer
         .container

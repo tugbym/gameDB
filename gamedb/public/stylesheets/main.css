@@ -12,46 +12,46 @@
 /* Jumbotron */
 
 .jumbotron {
-    height: 40vw;
+    height: 90vh;
+    margin: 0;
     color: white;
     display: block;
-    margin: 0 auto;
     background-color: transparent;
     background: url("../images/jumbotron.jpg") no-repeat center center;
     background-size: cover;
 }
 
 .jumbotron .container {
-    margin-top: 5vw;
+    margin-top: 40vh;
     text-align: center;
 }
 
 .jumbotron h1 {
-    font-size: 4vw;
+    line-height: 40px;
 }
 
 .jumbotron a {
-    margin-top: .5vw;
-    padding: 1vw 3vw;
-    font-size: 2vw;
+    margin-top: 20px;
+    padding: 10px 30px;
+    border-radius: 5px;
 }
 
 .jumbotron img {
     display: block;
     margin: 0 auto;
-    padding: 20px 0;
     fill: white;
 }
 
 .arrow {
     cursor: pointer;
+    margin-top: 8em;
 }
 
 .arrow .down {
     position: relative;
-    margin-top: .5vw;
+    margin-top: .2em;
     border: solid white;
-    border-width: 0 .4vw .4vw 0;
+    border-width: 0 .3em .3em 0;
     display: inline-block;
     padding: .60em;
     transform: rotate(45deg);
@@ -67,109 +67,65 @@
 /* Information Globals */
 
 div[class^="information"] {
-    margin-top: 60px;
+    line-height: 30px;
+    font-size: 17px;
 }
 
-div[class^="information"] p {
-    line-height: 25px;
+div[class^="information"] .container {
+    padding: 20px;
+    max-width: 75vw;
 }
 
-#pic, #icon {
+.pic, .icon {
     display: block;
-    margin: 0 auto;
 }
 
-#icon {
-    margin-top: 20px;
+.pic {
+    margin-left: auto;
+}
+
+.icon {
+    margin: 20px auto 0 auto;
+    height: 75px;
+    width: 75px;
 }
 
 /* Information Individuals */
 
-.information p:first-child {
+.information h2 {
+    text-align: center;
+}
+
+.information .row {
+    margin-top: 20px;
+}
+
+.information p {
     padding-top: 60px;
 }
 
-.information2 p:first-child {
-    padding-top: 18px;
+.information2 p {
+    padding-top: 2px;
+    text-align: right;
 }
 
 .information2 table {
+    margin: 0;
+    padding: 0;
+    text-align: right;
     margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-.information2 span {
+.information2 td {
     padding-left: 10px;
+}
+
+.information2 .pic {
+    margin-left: 0;
+    margin-right: auto;
 }
 
 .information3 p:first-child {
     padding-top: 30px;
-}
-
-/* Mobile Only */
-
-@media (min-width:320px) {
-    
-    div[class^="information"] {
-        text-align: center;
-    }
-    
-    div[class^="information"] h2 {
-        text-align: center;
-        padding: 0px;
-    }
-    
-}
-
-/* Tablet Only */
-
-@media (min-width:801px) {
-    
-    .jumbotron a {
-        font-size: 16px;
-    }
-    
-    .jumbotron .container {
-        margin-top: 10vw;
-    }
-    
-}
-
-/* Desktop Only */
-
-@media (min-width:1281px) {
-    
-    .jumbotron {
-        width: 1280px;
-        background-size: contain;
-    }
-    
-    .jumbotron .container {
-        margin-top: 250px;
-    }
-    
-    .jumbotron h1 {
-        font-size: 50px;
-    }
-    
-    .jumbotron a {
-        margin-top: 10px;
-        padding: 10px 30px;
-    }
-    
-    .information2 p {
-        text-align: right;
-    }
-    
-    .arrow .down {
-        margin-top: 10px;
-        border-width: 0 .4em .4em 0;
-    }
-    
-    div[class^="information"] h2 {
-        text-align: center;
-        padding: 20px;
-    }
-    
 }

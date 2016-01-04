@@ -8,8 +8,7 @@ body {
 }
 
 .container {
-    max-width: 950px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .wrapper {
@@ -18,7 +17,7 @@ body {
 }
 
 .main {
-    padding-bottom: 100px;
+    padding-bottom: 50px;
 }
 
 /* Animations */
@@ -34,23 +33,27 @@ body {
 
 /* Header */
 
-.header .container img {
-    margin: 0 auto;
-    display: block;
+.header .container {
+    margin-bottom: 20px;
 }
 
-.header .logo {
+.logo .container {
+    width: 75%;
+    float: left;
+}
+
+.logo .container img {
+    display: inline;
+}
+
+.logo {
     margin: 30px 0;
 }
 
-/* Navigation */
-
 .nav .container {
-    text-align: center;
-    padding: 20px 0;
-    background-color: #FBAB52;
-    border-radius: 10px;
-    margin-bottom: 100px;
+    margin-top: 10px;
+    width: 25%;
+    float: right;
 }
 
 .nav ul {
