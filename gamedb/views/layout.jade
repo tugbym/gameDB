@@ -20,23 +20,23 @@ html
             .container
               ul
                 li
-                  a(href="about") About
+                  a(href="/about") About
                   span |
                 li
-                  a(href="contact") Contact
+                  a(href="/contact") Contact
                   span |
                 if !session
                   li
-                    a(href="login") Login
+                    a(href="/login") Login
                     span |
                   li 
-                    a(href="register") Register
+                    a(href="/register") Register
                 else
                   li
-                    a(href="profile")=session.name.first
+                    a(href="/profile/#{session._id}")=session.name.first
                     span |
                   li
-                    a(href="logout") Logout
+                    a(href="/logout") Logout
       block content
       .footer
         .container

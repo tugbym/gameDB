@@ -27,7 +27,7 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -59,6 +59,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
 app.use('/profile', profile);
+app.post('/profile/:id', profile);
 app.use('/add_game', add_game);
 
 // catch 404 and forward to error handler

@@ -16,56 +16,71 @@ block content
             form(name="delete-game-form-#{index}" method='post')
               table
                 tr
-                  td
-                    span(class="glyphicon glyphicon-pencil edit-toggle-off edit-toggle-#{index}")
-                      td
-                        input(id='game-in-collection' type='text' name="selected-game" value=game.title readonly)
-                      td
-                        input(id='console-in-collection' type='text' name='selected-console' value=game.console readonly)
-                      td
-                        span(class='button show-extras show-extras-#{index}') Show Statistics
-                        input(id='remove-game' type='submit' class='button' value='Remove Game')
+                  if session._id === params
+                    td
+                      span(class="glyphicon glyphicon-pencil edit-toggle-off edit-toggle-#{index}")
+                    +delete_form(game, index)
+                  else
+                    +delete_form(game, index)
                         
           fieldset
-            form(name="edit-game-form-#{index}" method='post')
-              table
-                tr(class="edit edit-#{index}")
-                  td(colspan="2")
-                    p Achievements
-                  td(colspan="2")
-                    input(name='achievements-completed' type='number' class="editable-item editable-item-#{index}" value=game.achievements.completed disabled)
-                    span /
-                    input(name='achievements-total' type='number' class="editable-item editable-item-#{index}" value=game.achievements.total disabled)
-                tr(class="edit edit-#{index}")
-                  td(colspan="2")
-                    p Currently At
-                  td(colspan="2")
-                    textarea(name='current-progress' class="editable-item editable-item-#{index}" disabled) #{game.currentProgress}
-                tr(class="edit edit-#{index}")
-                  td(colspan="2")
-                    p Things to Do
-                  td(colspan="2")
-                    textarea(name='to-do' class="editable-item editable-item-#{index}" disabled) #{game.toDo}
-                tr(class="edit edit-#{index}")
-                  td(colspan="2")
-                    p Your Rating
-                  td(colspan="2")
-                    ul(id='star-list-#{index}')
-                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-1")
-                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-2")
-                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-3")
-                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-4")
-                      li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-5")
-                      input(name='your-rating' id="star-rating-#{index}" class="editable-item editable-item-#{index}" type='hidden' value=game.stars disabled)
-                tr(class="edit edit-#{index}")
-                  td(colspan="2")
-                    p Your Review
-                  td(colspan="2")
-                    textarea(name='your-review' class="editable-item editable-item-#{index}" disabled) #{game.review}
-                tr(class="edit-submit  edit-submit-#{index}")
-                  td(colspan="4")
-                    input(type='hidden' class="editable-item editable-item-#{index}" name="selected-game-to-edit" value=game.title disabled)
-                    input(type='hidden' class="editable-item editable-item-#{index}" name='selected-console-to-edit' value=game.console disabled)
-                    input(id='make-changes' type='submit' class='button' value='Make Changes')
+            if session._id === params
+              form(name="edit-game-form-#{index}" method='post')
+                +edit_form(game, index)
+            else
+              +edit_form(game, index)
               
-      a(href="add_game" class="btn btn-primary") Add a Game
+      if session._id === params
+        a(href="/add_game" class="btn btn-primary") Add a Game
+        
+mixin delete_form(game, index)
+  td
+    input(id='game-in-collection' type='text' name="selected-game" value=game.title readonly)
+  td
+    input(id='console-in-collection' type='text' name='selected-console' value=game.console readonly)
+  td
+    span(class='button show-extras show-extras-#{index}') Show Statistics
+    if session._id === params
+      input(id='remove-game' type='submit' class='button' value='Remove Game')
+  
+mixin edit_form(game, index)
+  table
+   tr(class="edit edit-#{index}")
+     td(colspan="2")
+       p Achievements
+     td(colspan="2")
+       input(name='achievements-completed' type='number' class="editable-item editable-item-#{index}" value=game.achievements.completed disabled)
+       span /
+       input(name='achievements-total' type='number' class="editable-item editable-item-#{index}" value=game.achievements.total disabled)
+   tr(class="edit edit-#{index}")
+     td(colspan="2")
+       p Currently At
+     td(colspan="2")
+       textarea(name='current-progress' class="editable-item editable-item-#{index}" disabled) #{game.currentProgress}
+   tr(class="edit edit-#{index}")
+     td(colspan="2")
+       p Things to Do
+     td(colspan="2")
+       textarea(name='to-do' class="editable-item editable-item-#{index}" disabled) #{game.toDo}
+   tr(class="edit edit-#{index}")
+     td(colspan="2")
+       p Your Rating
+     td(colspan="2")
+       ul(id='star-list-#{index}')
+         li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-1")
+         li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-2")
+         li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-3")
+         li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-4")
+         li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-5")
+         input(name='your-rating' id="star-rating-#{index}" class="editable-item editable-item-#{index}" type='hidden' value=game.stars disabled)
+   tr(class="edit edit-#{index}")
+     td(colspan="2")
+       p Your Review
+     td(colspan="2")
+       textarea(name='your-review' class="editable-item editable-item-#{index}" disabled) #{game.review}
+   tr(class="edit-submit  edit-submit-#{index}")
+     td(colspan="4")
+       input(type='hidden' class="editable-item editable-item-#{index}" name="selected-game-to-edit" value=game.title disabled)
+       input(type='hidden' class="editable-item editable-item-#{index}" name='selected-console-to-edit' value=game.console disabled)
+       if session._id === params
+         input(id='make-changes' type='submit' class='button' value='Make Changes')

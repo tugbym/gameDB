@@ -3,8 +3,7 @@ var express = require('express'),
     Profile = require('../models/profile-model'),
     mongoose = require('mongoose');
 
-/* GET register page. */
-router.get('/', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   if (!req.session.passport) {
       
      var err = new Error('You must be logged in to view this page.');
@@ -22,21 +21,39 @@ router.get('/', function(req, res, next) {
       var id = req.session.passport.user._id,
           response;
       
-      Profile.getGameList(id, function(err, profile) {
+      //Profile requested matches logged in user
+      if(req.params.id === id) {
+        Profile.getGameList(id, function(err, profile) {
           if(err) {
               response = "There was a problem retrieving your game list. Please try again later.";
-              return res.render('profile', { response: response });
+              return res.render('profile', { params: id, response: response });
           } else if(profile.gamesOwned.length === undefined || profile.gamesOwned.length === 0) {
               response = "It seems you have no games added. Why not try adding a game?";
-              return res.render('profile', { response: response });
+              return res.render('profile', { params: id, response: response });
           } else {
-              return res.render('profile', { gamesList: profile.gamesOwned });
+              return res.render('profile', { params: id, gamesList: profile.gamesOwned });
           }
-      });
+        });
+          
+      //Profile requested does not match logged in user
+      } else {
+        Profile.getGameList(req.params.id, function(err, profile) {
+          if(err) {
+              response = "There was a problem retrieving this users game list. Please try again later.";
+              return res.render('profile', { params: req.params.id, response: response });
+          } else if(profile.gamesOwned.length === undefined || profile.gamesOwned.length === 0) {
+              response = "This user has no games added.";
+              return res.render('profile', { params: req.params.id, response: response });
+          } else {
+              return res.render('profile', { params: req.params.id, gamesList: profile.gamesOwned });
+          }
+        });
+      }
+      
   }
 });
 
-router.post('/', function(req, res, next) {
+router.post('/:id', function(req, res, next) {
     
     var game = req.body['selected-game'],
         id = req.session.passport.user._id;
@@ -50,7 +67,7 @@ router.post('/', function(req, res, next) {
                 response = "There was a problem deleting this game from your list. Please try again later.";
                 return res.render('profile', { response: response });
             }
-            res.redirect('/profile');
+            res.redirect('/profile/' + id);
         });
     } else {
         var achievementsCompleted = req.body['achievements-completed'],
@@ -71,9 +88,9 @@ router.post('/', function(req, res, next) {
         
         Profile.editGameInfo(id, informationToAdd, function(err, response) {
             if(err) {
-                //err handling
+                console.log(err);
             }
-            res.redirect('/profile');
+            res.redirect('/profile/' + id);
         });
         
     }
