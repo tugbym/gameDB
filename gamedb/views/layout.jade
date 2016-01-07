@@ -33,7 +33,7 @@ html
                     a(href="/register") Register
                 else
                   li
-                    a(href="/profile/#{session._id}")=session.name.first
+                    a(href="/profile/#{session.username}")=session.name.first
                     span |
                   li
                     a(href="/logout") Logout

@@ -1,35 +1,29 @@
 /* Games Table */
 
-.main {
+.games {
+    width: 70%;
     text-align: center;
+    float: left;
 }
 
-.main .container {
-    max-width: 950px;
-}
-
-.main table {
+.games table {
     width: 100%;
     margin-bottom: 20px;
 }
 
-.main th {
+.games th {
     text-align: center;
 }
 
-.main td {
+.games td {
     padding: 5px;
 }
 
-.main h4 {
-    padding: 10px;
-}
-
-.main a {
+.games a {
     margin-top: 10px;
 }
 
-.main input {
+.games input {
     line-height: 17px;
 }
 
@@ -167,4 +161,27 @@
 
 #add:hover {
     background-color: rgb(63, 63, 63);
+}
+
+/* Friends */
+
+.friends {
+    width: 25%;
+    float: right;
+}
+
+.friends th {
+    text-align: center;
+}
+
+.friends table {
+    text-align: center;
+    width: 100%;
+}
+
+.friends input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: white;
 }

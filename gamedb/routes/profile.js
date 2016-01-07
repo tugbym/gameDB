@@ -3,7 +3,7 @@ var express = require('express'),
     Profile = require('../models/profile-model'),
     mongoose = require('mongoose');
 
-router.get('/:id', function(req, res, next) {
+router.get('/:username', function(req, res, next) {
   if (!req.session.passport) {
       
      var err = new Error('You must be logged in to view this page.');
@@ -19,44 +19,69 @@ router.get('/:id', function(req, res, next) {
       }
       
       var id = req.session.passport.user._id,
+          username = req.session.passport.user.username,
+          params = req.params.username,
           response;
       
       //Profile requested matches logged in user
-      if(req.params.id === id) {
-        Profile.getGameList(id, function(err, profile) {
+      if(params === username) {
+        Profile.getProfile(username, function(err, profile) {
           if(err) {
-              response = "There was a problem retrieving your game list. Please try again later.";
-              return res.render('profile', { params: id, response: response });
+              response = "There was a problem retrieving your profile. Please try again later.";
+              return res.render('profile', { params: username, response: response });
           } else if(profile.gamesOwned.length === undefined || profile.gamesOwned.length === 0) {
               response = "It seems you have no games added. Why not try adding a game?";
-              return res.render('profile', { params: id, response: response });
+              return res.render('profile', { params: username, response: response, profile: profile });
           } else {
-              return res.render('profile', { params: id, gamesList: profile.gamesOwned });
+              return res.render('profile', { params: username, profile: profile });
           }
         });
           
       //Profile requested does not match logged in user
       } else {
-        Profile.getGameList(req.params.id, function(err, profile) {
+        Profile.getProfile(params, function(err, profile) {
+            
           if(err) {
               response = "There was a problem retrieving this users game list. Please try again later.";
-              return res.render('profile', { params: req.params.id, response: response });
-          } else if(profile.gamesOwned.length === undefined || profile.gamesOwned.length === 0) {
-              response = "This user has no games added.";
-              return res.render('profile', { params: req.params.id, response: response });
-          } else {
-              return res.render('profile', { params: req.params.id, gamesList: profile.gamesOwned });
+              return res.render('profile', { params: params, response: response });
+          } else if(!profile) {
+              var err = new Error('This user does not exist.');
+              err.status = 404;
+              return next(err);
           }
+            
+          var friendFlag = false,
+              sentReqFlag = false,
+              mutualFlag = false;
+
+          if(profile.sentRequests.indexOf(username) != -1) {
+              friendFlag = true;
+          }
+          if(profile.receivedRequests.indexOf(username) != -1) {
+              sentReqFlag = true;
+          }
+          if(profile.mutualFriends.indexOf(username) != -1) {
+              mutualFlag = true;
+          }
+            
+          if(profile.gamesOwned.length === undefined || profile.gamesOwned.length === 0) {                  
+              response = "This user has no games added.";
+              return res.render('profile', { params: params, response: response, profile: profile, friendFlag: friendFlag, sentReqFlag: sentReqFlag, mutualFlag: mutualFlag });
+          } else {
+              return res.render('profile', { params: params, profile: profile, friendFlag: friendFlag, sentReqFlag: sentReqFlag, mutualFlag: mutualFlag });
+          }
+            
         });
       }
       
   }
 });
 
-router.post('/:id', function(req, res, next) {
+router.post('/:username', function(req, res, next) {
     
     var game = req.body['selected-game'],
-        id = req.session.passport.user._id;
+        id = req.session.passport.user._id,
+        username = req.session.passport.user.username;
     
     if(game) {
         var console = req.body['selected-console'],
@@ -65,9 +90,9 @@ router.post('/:id', function(req, res, next) {
         Profile.deleteGame(id, gameToDelete, function(err, response) {
             if(err) {
                 response = "There was a problem deleting this game from your list. Please try again later.";
-                return res.render('profile', { response: response });
+                return res.render('profile', { params: username, response: response });
             }
-            res.redirect('/profile/' + id);
+            res.redirect('/profile/' + username);
         });
     } else {
         var achievementsCompleted = req.body['achievements-completed'],
@@ -88,12 +113,45 @@ router.post('/:id', function(req, res, next) {
         
         Profile.editGameInfo(id, informationToAdd, function(err, response) {
             if(err) {
-                console.log(err);
+                response = "There was a problem adding your statistics to this game from your list. Please try again later.";
+                return res.render('profile', { params: username, response: response });
             }
-            res.redirect('/profile/' + id);
+            res.redirect('/profile/' + username);
         });
         
     }
+});
+
+router.post('/:username/add_friend', function(req, res, next) {
+    
+    var friend = req.params.username,
+        username = req.session.passport.user.username;
+    
+    Profile.sendFriendRequest(username, friend, function(err, response) {
+        if(err) {
+            return res.render('profile', { params: friend, response: response });
+        }
+        res.redirect('/profile/' + friend);
+    });
+    
+});
+
+router.post('/:username/accept_request', function(req, res, next) {
+    
+    var friend = req.body['received-request'],
+        username = req.session.passport.user.username;
+    
+    if(!friend) {
+        friend = req.params.username;
+    }
+    
+    Profile.acceptFriendRequest(username, friend, function(err, response) {
+        if(err) {
+            return res.render('profile', { params: username, response: response });
+        }
+        res.redirect('/profile/' + username);
+    });
+ 
 });
 
 module.exports = router;

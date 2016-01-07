@@ -5,7 +5,10 @@ var profileSchema = new Schema({
     userID: String,
     username: String,
     gamesOwned: [],
-    gamesWanted: []
+    gamesWanted: [],
+    mutualFriends: [],
+    sentRequests: [],
+    receivedRequests: []
 });
 
 var Profile = mongoose.model('profileModel', profileSchema);
@@ -15,7 +18,10 @@ module.exports.addNewProfile = function(id, username, callback) {
         userID: id,
         username: username,
         gamesOwned: [],
-        gamesWanted: []
+        gamesWanted: [],
+        mutualFriends: [],
+        sentRequests: [],
+        receivedRequests: []
     });
     
     profile.save(function(err, profile) {
@@ -29,8 +35,8 @@ module.exports.addNewProfile = function(id, username, callback) {
     });
 }
 
-module.exports.getGameList = function(id, callback) {
-    Profile.findOne({ 'userID': id }, function(err, profile) {
+module.exports.getProfile = function(username, callback) {
+    Profile.findOne({ 'username': username }, function(err, profile) {
         if(err) {
             return callback(err);
         }
@@ -126,4 +132,113 @@ module.exports.editGameInfo = function(id, gameInfo, callback) {
             });
         });        
     });
+}
+
+module.exports.sendFriendRequest = function(username, friend, callback) {
+    
+    //Update our sent requests array
+    Profile.findOne({ 'username': username }, function(err, user) {
+        if(err) {
+            return callback(err);
+        }
+        if(!user) {
+            return callback();
+        }
+        
+        var sentRequests = user.sentRequests;
+        sentRequests.push(friend);
+        
+        Profile.update({ 'username': username }, { 'sentRequests': sentRequests }, function(err, update) {
+            if(err) {
+                return callback(err);
+            }
+        });
+    });
+    
+    //Update our friends received requests array
+    Profile.findOne({ 'username': friend }, function(err, user) {
+        if(err) {
+            return callback(err);
+        }
+        if(!user) {
+            return callback();
+        }
+        
+        var receivedRequests = user.receivedRequests;
+        receivedRequests.push(username);
+        
+        Profile.update({ 'username': friend }, { 'receivedRequests': receivedRequests }, function(err, update) {
+            if(err) {
+                return callback(err);
+            }
+        });
+    });
+    
+    //Send the callback
+    return callback(null, {
+        response: 'Successfully sent friend request from ' + username + ' to ' + friend
+    });
+}
+
+module.exports.acceptFriendRequest = function(username, friend, callback) {
+    
+    //Delete friend from sent or received requests array
+    Profile.findOne({ 'username': username }, function(err, user) {
+        if(err) {
+            return callback(err);
+        }
+        if(!user) {
+            return callback();
+        }
+        
+        var pos1 = user.receivedRequests.indexOf(friend),
+            pos2 = user.sentRequests.indexOf(friend);
+        
+        if(pos1 != -1) {
+            user.receivedRequests.splice(pos1, 1);
+        }
+        if(pos2 != -1) {
+            user.sentRequests.splice(pos2, 1);
+        }
+        user.mutualFriends.push(friend);
+        
+        Profile.update({ 'username': username }, { 'receivedRequests': user.receivedRequests, 'sentRequests': user.sentRequests, 'mutualFriends': user.mutualFriends }, function(err, update) {
+            if(err) {
+                return callback(err);
+            }
+        });
+    });
+    
+    //Delete us from friends sent or received requests array
+    Profile.findOne({ 'username': friend }, function(err, user) {
+        if(err) {
+            return callback(err);
+        }
+        if(!user) {
+            return callback();
+        }
+        
+        var pos1 = user.receivedRequests.indexOf(username),
+            pos2 = user.sentRequests.indexOf(username);
+        
+        if(pos1 != -1) {
+            user.receivedRequests.splice(pos1, 1);
+        }
+        if(pos2 != -1) {
+            user.sentRequests.splice(pos2, 1);
+        }
+        user.mutualFriends.push(username);
+        
+        Profile.update({ 'username': friend}, { 'sentRequests': user.sentRequests, 'receivedRequests': user.receivedRequests, 'mutualFriends': user.mutualFriends }, function(err, update) {
+            if(err) {
+                return callback(err);
+            }
+        });
+    });
+    
+    //Send the callback
+    return callback(null, {
+        response: 'Successfully accepted friend request from ' + friend
+    });
+    
 }

@@ -10,28 +10,79 @@ block content
       if response
         h3=response
       else
-        h3 Your games:
-        each game, index in gamesList
-          fieldset
-            form(name="delete-game-form-#{index}" method='post')
-              table
-                tr
-                  if session._id === params
-                    td
-                      span(class="glyphicon glyphicon-pencil edit-toggle-off edit-toggle-#{index}")
-                    +delete_form(game, index)
-                  else
-                    +delete_form(game, index)
+        .games
+          .container
+            h3 Your games:
+            each game, index in profile.gamesOwned
+              fieldset
+                form(name="delete-game-form-#{index}" method='post')
+                  table
+                    tr
+                      if session.username === params
+                        td
+                          span(class="glyphicon glyphicon-pencil edit-toggle-off edit-toggle-#{index}")
+                        +delete_form(game, index)
+                      else
+                        +delete_form(game, index)
                         
-          fieldset
-            if session._id === params
-              form(name="edit-game-form-#{index}" method='post')
-                +edit_form(game, index)
-            else
-              +edit_form(game, index)
+              fieldset
+                if session.username === params
+                  form(name="edit-game-form-#{index}" method='post')
+                    +edit_form(game, index)
+                else
+                  +edit_form(game, index)
               
-      if session._id === params
+      if session.username === params
         a(href="/add_game" class="btn btn-primary") Add a Game
+      .friends
+        .container
+          if session.username === params
+            h3 Mutual Friends
+            each mutual, index in profile.mutualFriends
+              fieldset
+                form(name="edit-mutual-friends-form-#{index}" method='post')
+                  table
+                    tr
+                      td
+                        p=mutual
+                      td
+                        p Online
+            h3 Sent Requests           
+            each sent, index in profile.sentRequests
+              fieldset
+                form(name="edit-sent-requests-form-#{index}" method='post')
+                  table
+                    tr
+                      td
+                        p=sent
+                      td
+                        p Online
+            h3 Received Requests
+            each received, index in profile.receivedRequests
+              fieldset
+                form(name="edit-received-requests-form-#{index}" method='post' action='/profile/' + params + '/accept_request')
+                  table
+                    tr
+                      td
+                        input(id='received-request' type='text' name='received-request' value=received readonly)
+                      td
+                        p Online
+                    tr
+                      td(colspan="2")
+                        input(id='accept-request' type='submit' class='button' value='Accept Request')
+          else if friendFlag
+            fieldset
+              form(name="accept-friend-form" method='post' action='/profile/' + params + '/accept_request')
+                input(id='accept-friend' type='submit' class='button' value='Accept Friend Request')
+          else if sentReqFlag
+            p This user has received your friend request.
+          else if mutualFlag
+            p You are friends with this user.
+          else
+            fieldset
+              form(name="add-friend-form" method='post' action='/profile/' + params + '/add_friend')
+                input(id='add-friend' type='submit' class='button' value='Send Friend Request')
+         
         
 mixin delete_form(game, index)
   td
@@ -40,7 +91,7 @@ mixin delete_form(game, index)
     input(id='console-in-collection' type='text' name='selected-console' value=game.console readonly)
   td
     span(class='button show-extras show-extras-#{index}') Show Statistics
-    if session._id === params
+    if session.username === params
       input(id='remove-game' type='submit' class='button' value='Remove Game')
   
 mixin edit_form(game, index)
@@ -82,5 +133,5 @@ mixin edit_form(game, index)
      td(colspan="4")
        input(type='hidden' class="editable-item editable-item-#{index}" name="selected-game-to-edit" value=game.title disabled)
        input(type='hidden' class="editable-item editable-item-#{index}" name='selected-console-to-edit' value=game.console disabled)
-       if session._id === params
+       if session.username === params
          input(id='make-changes' type='submit' class='button' value='Make Changes')
