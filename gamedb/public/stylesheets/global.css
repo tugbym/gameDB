@@ -12,12 +12,16 @@ body {
 }
 
 .wrapper {
+    width: 100%;
 	min-height: 100%;
 	position: relative;
+    overflow: hidden;
 }
 
 .main {
     padding-bottom: 50px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Animations */
@@ -33,12 +37,8 @@ body {
 
 /* Header */
 
-.header .container {
-    margin-bottom: 20px;
-}
-
-.logo .container {
-    width: 75%;
+.logo {
+    width: 60%;
     float: left;
 }
 
@@ -50,10 +50,14 @@ body {
     margin: 30px 0;
 }
 
-.nav .container {
-    margin-top: 10px;
-    width: 25%;
+.nav {
+    width: 40%;
+    margin-top: 40px;
     float: right;
+}
+
+.nav .container {
+    text-align: right;
 }
 
 .nav ul {
@@ -70,7 +74,7 @@ body {
     padding: 0 20px;
 }
 
-.nav li a {
+.nav li a, .friends-btn {
     color: white;
     text-decoration: none;
     font-size: 18px;
@@ -78,12 +82,78 @@ body {
     font-weight: 400;
     text-shadow: 2px 2px black;
     line-height: 23px;
+    vertical-align: top;
 }
 
-.nav a:hover {
+.nav a:hover, .friends-btn:hover, .friends a:hover {
     animation-name: hover;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+}
+
+/* Friends */
+
+.btn:focus {
+    color: white;
+}
+
+.friends-btn {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.friends-btn span {
+    padding-left: 10px;
+}
+
+.friends {
+    display: none;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 15%;
+}
+
+.friends th {
+    text-align: center;
+}
+
+.friends table {
+    text-align: center;
+    width: 100%;
+}
+
+.friends input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.friends h4 {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.friends table {
+    margin: 20px auto;
+}
+
+.friends a, p {
+    font-size: 14px;
+    vertical-align: center;
+    margin: 0;
+}
+
+.friends a {
+    color: white;
+    text-decoration: none;
+}
+
+.friends tr {
+    margin-bottom: 10px;
 }
 
 /* Footer */

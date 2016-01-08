@@ -16,6 +16,8 @@ var index = require('./routes/index'),
     profile = require('./routes/profile'),
     add_game = require('./routes/add_game');
 
+var Profile = require('./models/profile-model');
+
 var app = express();
 mongoose.connect('mongodb://localhost/GameDB');
 
@@ -40,11 +42,25 @@ app.use(flash());
 app.use(function(req, res, next) {
     if(req.session.passport !== undefined) {
         if(req.session.passport['user'] ) {
-            res.locals.session = req.session.passport.user;
+            var user = req.session.passport.user.username;
+            Profile.getProfile(user, function(err, profile) {
+                if(err) {
+                    console.log("Error retrieving users profile.");
+                }
+                res.locals.session = req.session.passport.user;
+                res.locals.session.profile = {};
+                res.locals.session.profile.mutualFriends = profile.mutualFriends;
+                res.locals.session.profile.sentRequests = profile.sentRequests;
+                res.locals.session.profile.receivedRequests = profile.receivedRequests;
+                next();
+            });
+        } else {
+            next();
         }
+    } else {
+        next();
     }
-    next();
-})
+});
 
 // Log form data
 if (app.get('env') === 'development') {
@@ -59,7 +75,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
 app.use('/profile', profile);
-app.post('/profile/:id', profile);
+app.post('/profile/:username', profile);
 app.use('/add_game', add_game);
 
 // catch 404 and forward to error handler

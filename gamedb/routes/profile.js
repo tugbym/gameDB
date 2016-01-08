@@ -149,7 +149,7 @@ router.post('/:username/accept_request', function(req, res, next) {
         if(err) {
             return res.render('profile', { params: username, response: response });
         }
-        res.redirect('/profile/' + username);
+        res.redirect('/profile/' + friend);
     });
  
 });

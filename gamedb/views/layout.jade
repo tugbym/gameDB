@@ -8,6 +8,7 @@ html
     link(rel='stylesheet', href='/stylesheets/global.css')
     link(rel='stylesheet', href='/stylesheets/social.css')
     block scripts
+    script(src='/javascripts/global.js')
   body
     .wrapper
       .header
@@ -15,7 +16,7 @@ html
           .logo
             .container
               a(href="/")
-                img(src="../images/logo.png" height="49" width="230")
+                img(src="/images/logo.png" height="49" width="230")
           .nav
             .container
               ul
@@ -37,6 +38,44 @@ html
                     span |
                   li
                     a(href="/logout") Logout
+                    span |
+                  li
+                    button(class="friends-btn btn dropdown-toggle") Friends
+                      span(class="fa fa-angle-double-down")
+      if session
+        .friends
+          .container
+            if session.profile.mutualFriends[0]
+              h4 Mutual Friends
+                each mutual, index in session.profile.mutualFriends
+                  fieldset
+                    form(name="edit-mutual-friends-form-#{index}" method='post')
+                      table
+                        tr
+                          td
+                            a(href="/profile/#{mutual}")=mutual
+                          td
+                            p Offline
+            if session.profile.sentRequests[0]                
+              h4 Sent Requests           
+              each sent, index in session.profile.sentRequests
+                fieldset
+                  form(name="edit-sent-requests-form-#{index}" method='post')
+                    table
+                      tr
+                        td
+                          a(href="/profile/#{sent}")=sent
+            if session.profile.receivedRequests[0]
+              h4 Received Requests
+              each received, index in session.profile.receivedRequests
+                fieldset
+                  form(name="edit-received-requests-form-#{index}" method='post' action='/profile/' + params + '/accept_request')
+                    table
+                      tr
+                        td
+                          input(id='received-request' type='text' name='received-request' value=received readonly)
+                        td
+                          input(id='accept-request' type='submit' class='button' value='Accept Request')
       block content
       .footer
         .container

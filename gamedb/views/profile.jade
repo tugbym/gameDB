@@ -12,7 +12,7 @@ block content
       else
         .games
           .container
-            h3 Your games:
+            h3 #{params}'s games:
             each game, index in profile.gamesOwned
               fieldset
                 form(name="delete-game-form-#{index}" method='post')
@@ -34,54 +34,19 @@ block content
               
       if session.username === params
         a(href="/add_game" class="btn btn-primary") Add a Game
-      .friends
-        .container
-          if session.username === params
-            h3 Mutual Friends
-            each mutual, index in profile.mutualFriends
-              fieldset
-                form(name="edit-mutual-friends-form-#{index}" method='post')
-                  table
-                    tr
-                      td
-                        p=mutual
-                      td
-                        p Online
-            h3 Sent Requests           
-            each sent, index in profile.sentRequests
-              fieldset
-                form(name="edit-sent-requests-form-#{index}" method='post')
-                  table
-                    tr
-                      td
-                        p=sent
-                      td
-                        p Online
-            h3 Received Requests
-            each received, index in profile.receivedRequests
-              fieldset
-                form(name="edit-received-requests-form-#{index}" method='post' action='/profile/' + params + '/accept_request')
-                  table
-                    tr
-                      td
-                        input(id='received-request' type='text' name='received-request' value=received readonly)
-                      td
-                        p Online
-                    tr
-                      td(colspan="2")
-                        input(id='accept-request' type='submit' class='button' value='Accept Request')
-          else if friendFlag
-            fieldset
-              form(name="accept-friend-form" method='post' action='/profile/' + params + '/accept_request')
-                input(id='accept-friend' type='submit' class='button' value='Accept Friend Request')
-          else if sentReqFlag
-            p This user has received your friend request.
-          else if mutualFlag
-            p You are friends with this user.
-          else
-            fieldset
-              form(name="add-friend-form" method='post' action='/profile/' + params + '/add_friend')
-                input(id='add-friend' type='submit' class='button' value='Send Friend Request')
+      else
+        if friendFlag
+          fieldset
+            form(name="accept-friend-form" method='post' action='/profile/' + params + '/accept_request')
+              input(id='accept-friend' type='submit' class='button' value='Accept Friend Request')
+        else if sentReqFlag
+          p This user has received your friend request.
+        else if mutualFlag
+          p You are friends with this user.
+        else
+          fieldset
+            form(name="add-friend-form" method='post' action='/profile/' + params + '/add_friend')
+              input(id='add-friend' type='submit' class='button' value='Send Friend Request')
          
         
 mixin delete_form(game, index)

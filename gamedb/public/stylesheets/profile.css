@@ -1,9 +1,9 @@
 /* Games Table */
 
 .games {
-    width: 70%;
+    width: 50%;
     text-align: center;
-    float: left;
+    margin: 0 auto;
 }
 
 .games table {
@@ -102,86 +102,4 @@
 
 .edit textarea {
     color: black;
-}
-
-/* Search Bar */
-
-.search span {
-    padding: 10px;
-}
-
-.search input, select {
-    margin-right: 30px;
-}
-
-.search input, option, select {
-    color: black;
-}
-
-/* Results */
-
-.results table {
-    margin-top: 40px;
-    width: 100%;
-}
-
-.results th {
-    text-align: center;
-    padding-bottom: 10px;
-}
-
-.results td {
-    padding: 20px;
-    color: #589983;
-}
-
-.results p {
-    padding: 20px;
-}
-
-#game, #console {
-    text-align: center;
-    background-color: transparent;
-    border: none;
-}
-
-#game {
-    width: 50%;
-}
-
-#console {
-    width: 20%;
-}
-
-#add {
-    background-color: transparent;
-    border: 1px solid;
-    text-align: right;
-}
-
-#add:hover {
-    background-color: rgb(63, 63, 63);
-}
-
-/* Friends */
-
-.friends {
-    width: 25%;
-    float: right;
-}
-
-.friends th {
-    text-align: center;
-}
-
-.friends table {
-    text-align: center;
-    width: 100%;
-}
-
-.friends input {
-    outline: none;
-    background-color: transparent;
-    border: none;
-    color: white;
 }

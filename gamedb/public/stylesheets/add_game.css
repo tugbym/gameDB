@@ -1,0 +1,69 @@
+/* Search Bar */
+
+.search {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.search span {
+    padding: 10px;
+}
+
+.search input, select {
+    margin-right: 30px;
+}
+
+.search input, option, select {
+    color: black;
+}
+
+/* Results */
+
+.results {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.results table {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.results th {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.results td {
+    padding: 20px;
+    color: #589983;
+}
+
+.results p {
+    padding: 20px;
+}
+
+#game, #console {
+    text-align: center;
+    background-color: transparent;
+    border: none;
+}
+
+#game {
+    width: 30%;
+}
+
+#console {
+    width: 30%;
+}
+
+#add {
+    background-color: transparent;
+    border: 1px solid;
+    text-align: right;
+}
+
+#add:hover {
+    background-color: rgb(63, 63, 63);
+}
