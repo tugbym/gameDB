@@ -47,15 +47,15 @@ html
           .container
             if session.profile.mutualFriends[0]
               h4 Mutual Friends
-                each mutual, index in session.profile.mutualFriends
-                  fieldset
-                    form(name="edit-mutual-friends-form-#{index}" method='post')
-                      table
-                        tr
-                          td
-                            a(href="/profile/#{mutual}")=mutual
-                          td
-                            p Offline
+              each mutual, index in session.profile.mutualFriends
+                fieldset
+                  form(name="edit-mutual-friends-form-#{index}" method='post')
+                    table
+                      tr
+                        td
+                          a(href="/profile/#{mutual}")=mutual
+                        td
+                          p Offline
             if session.profile.sentRequests[0]                
               h4 Sent Requests           
               each sent, index in session.profile.sentRequests

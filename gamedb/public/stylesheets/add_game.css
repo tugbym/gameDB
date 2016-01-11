@@ -2,7 +2,7 @@
 
 .search {
     width: 75%;
-    margin: 0 auto;
+    margin: 7vh auto;
 }
 
 .search span {
@@ -51,11 +51,11 @@
 }
 
 #game {
-    width: 30%;
+    width: 50%;
 }
 
 #console {
-    width: 30%;
+    width: 20%;
 }
 
 #add {
@@ -66,4 +66,54 @@
 
 #add:hover {
     background-color: rgb(63, 63, 63);
+}
+
+/* Media Queries */
+
+@media(max-width: 1200px) {
+    
+    .search {
+        margin-top: 10vh;
+    }
+    
+}
+
+@media(max-width: 1040px) {
+    
+    .search span, .search select {
+        display: block;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    
+    .search select {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .search input {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    
+    .results td {
+        padding: 20px 0;
+    }
+    
+    .results input {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin: 5px auto;
+    }
+    
+    #add {
+        width: auto;
+        margin: 5px auto;
+    }
+    
+    #game {
+        width: 100%;
+    }
+    
 }

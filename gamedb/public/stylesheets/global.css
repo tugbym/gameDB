@@ -15,13 +15,12 @@ body {
     width: 100%;
 	min-height: 100%;
 	position: relative;
-    overflow: hidden;
 }
 
 .main {
+    padding-top: 6%;
     padding-bottom: 50px;
     text-align: center;
-    margin-top: 20px;
 }
 
 /* Animations */
@@ -37,8 +36,17 @@ body {
 
 /* Header */
 
+.header {
+    border-bottom: 1px outset white;
+    background-color: black;
+    width: 100%;
+    height: 12vh;
+    z-index: 1;
+    position: fixed;
+}
+
 .logo {
-    width: 60%;
+    width: 20%;
     float: left;
 }
 
@@ -51,7 +59,7 @@ body {
 }
 
 .nav {
-    width: 40%;
+    width: 80%;
     margin-top: 40px;
     float: right;
 }
@@ -108,6 +116,8 @@ body {
 }
 
 .friends {
+    background-color: rgb(30,30,30);
+    border-left: 2px outset white;
     display: none;
     height: 100vh;
     position: fixed;
@@ -133,15 +143,18 @@ body {
 }
 
 .friends h4 {
-    margin-top: 40px;
+    margin: 40px auto 0 auto;
+    width: 75%;
+    padding-bottom: 10px;
     text-align: center;
+    border-bottom: 1px outset white;
 }
 
 .friends table {
     margin: 20px auto;
 }
 
-.friends a, p {
+.friends a, .friends p {
     font-size: 14px;
     vertical-align: center;
     margin: 0;
@@ -169,4 +182,60 @@ body {
 
 .footer a {
     margin: 10px;
+}
+
+/* Media Queries */
+
+@media (max-width:1025px) {
+    
+    .logo {
+        margin: 10px 0;
+        float: none;
+        width: 100%;
+    }
+    
+    .logo .container img {
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .nav {
+        width: 100%;
+        float: none;
+        margin-top: 0;
+    }
+    
+    .nav .container {
+        text-align: center;
+    }
+    
+    .friends td {
+        display: block;
+        margin: 10px 0;
+    }
+    
+    .nav li {
+        display: block;
+    }
+    
+    .nav span {
+        display: none;
+    }
+    
+    .nav button {
+        margin-left: 30px;
+    }
+    
+    .nav button span {
+        display: inline;
+    }
+    
+    .header {
+        height: 22vh;
+    }
+    
+    .main {
+        padding-top: 17vh;
+    }
+    
 }

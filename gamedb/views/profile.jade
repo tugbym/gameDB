@@ -12,7 +12,18 @@ block content
       else
         .games
           .container
-            h3 #{params}'s games:
+            table(id="table-head")
+              tr
+                th(colspan="4")
+                  h3 #{params}'s games:
+              tr
+                th
+                th
+                  p Game
+                th
+                  p Console
+                th
+                  p Options
             each game, index in profile.gamesOwned
               fieldset
                 form(name="delete-game-form-#{index}" method='post')
@@ -60,26 +71,30 @@ mixin delete_form(game, index)
       input(id='remove-game' type='submit' class='button' value='Remove Game')
   
 mixin edit_form(game, index)
-  table
+  table(id="edit-table")
    tr(class="edit edit-#{index}")
-     td(colspan="2")
+     td
+     td
        p Achievements
      td(colspan="2")
        input(name='achievements-completed' type='number' class="editable-item editable-item-#{index}" value=game.achievements.completed disabled)
        span /
        input(name='achievements-total' type='number' class="editable-item editable-item-#{index}" value=game.achievements.total disabled)
    tr(class="edit edit-#{index}")
-     td(colspan="2")
+     td
+     td
        p Currently At
      td(colspan="2")
        textarea(name='current-progress' class="editable-item editable-item-#{index}" disabled) #{game.currentProgress}
    tr(class="edit edit-#{index}")
-     td(colspan="2")
+     td
+     td
        p Things to Do
      td(colspan="2")
        textarea(name='to-do' class="editable-item editable-item-#{index}" disabled) #{game.toDo}
    tr(class="edit edit-#{index}")
-     td(colspan="2")
+     td
+     td
        p Your Rating
      td(colspan="2")
        ul(id='star-list-#{index}')
@@ -90,7 +105,8 @@ mixin edit_form(game, index)
          li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-5")
          input(name='your-rating' id="star-rating-#{index}" class="editable-item editable-item-#{index}" type='hidden' value=game.stars disabled)
    tr(class="edit edit-#{index}")
-     td(colspan="2")
+     td
+     td
        p Your Review
      td(colspan="2")
        textarea(name='your-review' class="editable-item editable-item-#{index}" disabled) #{game.review}
