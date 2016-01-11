@@ -21,12 +21,10 @@ var Profile = require('./models/profile-model'),
 
 var app = express();
 
-mongoose.connect(mongo_login.getMongoLogin);
-
 if (app.get('env') === 'development') {
-    //mongoose.connect('mongodb://localhost/GameDB');
+    mongoose.connect('mongodb://localhost/GameDB');
 } else {
-    
+    mongoose.connect(mongo_login.getMongoLogin);
 }
 
 // view engine setup
