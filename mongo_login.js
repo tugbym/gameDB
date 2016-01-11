@@ -1,1 +1,1 @@
-module.exports.getMongoLogin = "mongodb://Icestorm@ds035985.mongolab.com:35985/heroku_mz3wwm9x";
+module.exports.getMongoLogin = "mongodb://Icestorm:MongoAdmin5050!@ds035985.mongolab.com:35985/heroku_mz3wwm9x";
