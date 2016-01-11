@@ -16,10 +16,16 @@ var index = require('./routes/index'),
     profile = require('./routes/profile'),
     add_game = require('./routes/add_game');
 
-var Profile = require('./models/profile-model');
+var Profile = require('./models/profile-model'),
+    mongo_login = require('./mongo_login');
 
 var app = express();
-mongoose.connect('mongodb://localhost/GameDB');
+
+if (app.get('env') === 'development') {
+    mongoose.connect('mongodb://localhost/GameDB');
+} else {
+    mongoose.connect(mongo_login.getMongoLogin);
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
