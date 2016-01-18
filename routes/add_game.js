@@ -15,10 +15,10 @@ router.get('/', function(req, res, next) {
      
   } else {
       
-      if(!req.session.passport['user']) {
-        var err = new Error('You must be logged in to view this page.');
-        err.status = 401;
-        return next(err);
+      if(!req.session.passport.user) {
+        var error = new Error('You must be logged in to view this page.');
+        error.status = 401;
+        return next(error);
       }
       
       res.render('add_game');
@@ -36,17 +36,17 @@ router.post('/', function(req, res, next) {
      
     } else {
       
-        if(!req.session.passport['user']) {
-          var err = new Error('You must be logged in to view this page.');
-          err.status = 401;
-          return next(err);
+        if(!req.session.passport.user) {
+            var error = new Error('You must be logged in to view this page.');
+            error.status = 401;
+            return next(error);
         }
       
         //Search form submitted
-        if(req.body['search-query'] !== undefined) {
+        if(req.body.search_query !== undefined) {
           
-          var query = req.body['search-query'];
-          var searchBy = req.body['search-by'];
+          var query = req.body.search_query;
+          var searchBy = req.body.search_by;
       
           query = query.replace(/ /g, '%20');
       
@@ -79,8 +79,8 @@ router.post('/', function(req, res, next) {
             
       //Add Game form submitted
       } else {
-          var game = req.body['selected-game'],
-              console = req.body['selected-console'],
+          var game = req.body.selected_game,
+              console = req.body.selected_console,
               id = req.session.passport.user._id,
               newGame = { title: game,
                           console: console, 
@@ -92,7 +92,8 @@ router.post('/', function(req, res, next) {
           
           Profile.addGame(id, newGame, function(err, response) {
               if(err) {
-                  return res.render('add_game', { message: err} );
+                  res.status(err.status || 500);
+                  return res.render('add_game', { message: err.message } );
               }
               res.render('add_game', { message: 'Successfully added: ' + game });
           });

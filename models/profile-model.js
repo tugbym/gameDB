@@ -11,7 +11,7 @@ var profileSchema = new Schema({
     receivedRequests: []
 });
 
-var Profile = mongoose.model('profileModel', profileSchema);
+var Profile = mongoose.model('profile', profileSchema);
 
 module.exports.addNewProfile = function(id, username, callback) {
     var profile = new Profile({
@@ -24,14 +24,20 @@ module.exports.addNewProfile = function(id, username, callback) {
         receivedRequests: []
     });
     
-    profile.save(function(err, profile) {
+    profile.save(function(err) {
         if(err) {
             return callback(err);
         }
-        return callback(null, {
-            message: 'Successfully added new user profile.',
-            profile: profile
-        });
+        return callback(null, 'Successfully added new user profile.');
+    });
+}
+
+module.exports.removeProfile = function(username, callback) {
+    Profile.remove({ 'username': username }, function(err) {
+        if(err) {
+            return callback(err);
+        }
+        return callback(null, 'Successfully deleted user profile.');
     });
 }
 
@@ -56,13 +62,20 @@ module.exports.addGame = function(id, newGame, callback) {
             return callback();
         }
         
-        var gamesOwned = user.gamesOwned;
+        var gamesOwned = user.gamesOwned,
+            error;
         
         gamesOwned.forEach(function(gameOwned) {
             if(gameOwned.title === newGame.title && gameOwned.console === newGame.console) {
-                return callback("You already have this game added.");
+                error = new Error;
+                error.message = "You already have this game added.";
+                error.status = 409;
             }
         });
+        
+        if(error) {
+            return callback(error);
+        }
         
         gamesOwned.push(newGame);
         
@@ -123,7 +136,7 @@ module.exports.editGameInfo = function(id, gameInfo, callback) {
             }
         });
         
-        Profile.update({ 'userID': id}, { 'gamesOwned': gamesOwned }, function(err, update) {
+        Profile.update({ 'userID': id }, { 'gamesOwned': gamesOwned }, function(err, update) {
             if(err) {
                 return callback(err);
             }

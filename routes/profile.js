@@ -4,19 +4,8 @@ var express = require('express'),
     mongoose = require('mongoose');
 
 router.get('/:username', function(req, res, next) {
-  if (!req.session.passport) {
-      
-     var err = new Error('You must be logged in to view this page.');
-     err.status = 401;
-     return next(err);
-     
-  } else {
-      
-      if(!req.session.passport['user']) {
-        var err = new Error('You must be logged in to view this page.');
-        err.status = 401;
-        return next(err);
-      }
+    
+    logInCheck(req.session.passport, next);
       
       var id = req.session.passport.user._id,
           username = req.session.passport.user.username,
@@ -45,7 +34,7 @@ router.get('/:username', function(req, res, next) {
               response = "There was a problem retrieving this users game list. Please try again later.";
               return res.render('profile', { params: params, response: response });
           } else if(!profile) {
-              var err = new Error('This user does not exist.');
+              err = new Error('This user does not exist.');
               err.status = 404;
               return next(err);
           }
@@ -54,13 +43,13 @@ router.get('/:username', function(req, res, next) {
               sentReqFlag = false,
               mutualFlag = false;
 
-          if(profile.sentRequests.indexOf(username) != -1) {
+          if(profile.sentRequests.indexOf(username) !== -1) {
               friendFlag = true;
           }
-          if(profile.receivedRequests.indexOf(username) != -1) {
+          if(profile.receivedRequests.indexOf(username) !== -1) {
               sentReqFlag = true;
           }
-          if(profile.mutualFriends.indexOf(username) != -1) {
+          if(profile.mutualFriends.indexOf(username) !== -1) {
               mutualFlag = true;
           }
             
@@ -73,19 +62,19 @@ router.get('/:username', function(req, res, next) {
             
         });
       }
-      
-  }
-});
+  });
 
 router.post('/:username', function(req, res, next) {
     
-    var game = req.body['selected-game'],
+    logInCheck(req.session.passport, next);
+    
+    var game = req.body.selected_game,
         id = req.session.passport.user._id,
         username = req.session.passport.user.username;
     
     if(game) {
-        var console = req.body['selected-console'],
-            gameToDelete = { title: game, console: console };
+        var consoleToDelete = req.body.selected_console,
+            gameToDelete = { title: game, console: consoleToDelete };
     
         Profile.deleteGame(id, gameToDelete, function(err, response) {
             if(err) {
@@ -95,14 +84,14 @@ router.post('/:username', function(req, res, next) {
             res.redirect('/profile/' + username);
         });
     } else {
-        var achievementsCompleted = req.body['achievements-completed'],
-            achievementsTotal = req.body['achievements-total'],
-            currentProgress = req.body['current-progress'],
-            toDo = req.body['to-do'],
-            stars = req.body['your-rating'],
-            review = req.body['your-review'],
-            title = req.body['selected-game-to-edit'],
-            console = req.body['selected-console-to-edit'],
+        var achievementsCompleted = req.body.achievements_completed,
+            achievementsTotal = req.body.achievements_total,
+            currentProgress = req.body.current_progress,
+            toDo = req.body.to_do,
+            stars = req.body.your_rating,
+            review = req.body.your_review,
+            title = req.body.selected_game_to_edit,
+            console = req.body.selected_console_to_edit,
             informationToAdd = { title: title,
                                console: console, 
                                achievements: { completed: achievementsCompleted, total: achievementsTotal }, 
@@ -124,6 +113,8 @@ router.post('/:username', function(req, res, next) {
 
 router.post('/:username/add_friend', function(req, res, next) {
     
+    logInCheck(req.session.passport, next);
+    
     var friend = req.params.username,
         username = req.session.passport.user.username;
     
@@ -138,7 +129,9 @@ router.post('/:username/add_friend', function(req, res, next) {
 
 router.post('/:username/accept_request', function(req, res, next) {
     
-    var friend = req.body['received-request'],
+    logInCheck(req.session.passport, next);
+    
+    var friend = req.body.received_request,
         username = req.session.passport.user.username;
     
     if(!friend) {
@@ -153,5 +146,23 @@ router.post('/:username/accept_request', function(req, res, next) {
     });
  
 });
+
+function logInCheck(session, next) {
+    
+    var err;
+    
+    if (!session) {
+        err = new Error('You must be logged in to view this page.');
+        err.status = 401;
+        return next(err);
+    }
+    
+    if(!session.user) {
+        err = new Error('You must be logged in to view this page.');
+        err.status = 401;
+        return next(err);
+    }
+    
+}
 
 module.exports = router;

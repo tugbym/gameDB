@@ -62,9 +62,9 @@ block content
         
 mixin delete_form(game, index)
   td
-    input(id='game-in-collection' type='text' name="selected-game" value=game.title readonly)
+    input(id='game-in-collection' type='text' name="selected_game" value=game.title readonly)
   td
-    input(id='console-in-collection' type='text' name='selected-console' value=game.console readonly)
+    input(id='console-in-collection' type='text' name='selected_console' value=game.console readonly)
   td
     span(class='button show-extras show-extras-#{index}') Show Statistics
     if session.username === params
@@ -77,21 +77,21 @@ mixin edit_form(game, index)
      td
        p Achievements
      td(colspan="2")
-       input(name='achievements-completed' type='number' class="editable-item editable-item-#{index}" value=game.achievements.completed disabled)
+       input(name='achievements_completed' type='number' class="editable-item editable-item-#{index}" value=game.achievements.completed disabled)
        span /
-       input(name='achievements-total' type='number' class="editable-item editable-item-#{index}" value=game.achievements.total disabled)
+       input(name='achievements_total' type='number' class="editable-item editable-item-#{index}" value=game.achievements.total disabled)
    tr(class="edit edit-#{index}")
      td
      td
        p Currently At
      td(colspan="2")
-       textarea(name='current-progress' class="editable-item editable-item-#{index}" disabled) #{game.currentProgress}
+       textarea(name='current_progress' class="editable-item editable-item-#{index}" disabled) #{game.currentProgress}
    tr(class="edit edit-#{index}")
      td
      td
        p Things to Do
      td(colspan="2")
-       textarea(name='to-do' class="editable-item editable-item-#{index}" disabled) #{game.toDo}
+       textarea(name='to_do' class="editable-item editable-item-#{index}" disabled) #{game.toDo}
    tr(class="edit edit-#{index}")
      td
      td
@@ -103,16 +103,16 @@ mixin edit_form(game, index)
          li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-3")
          li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-4")
          li(class="glyphicon glyphicon-star-empty star-#{index} glyphicon-star-#{index}-5")
-         input(name='your-rating' id="star-rating-#{index}" class="editable-item editable-item-#{index}" type='hidden' value=game.stars disabled)
+         input(name='your_rating' id="star-rating-#{index}" class="editable-item editable-item-#{index}" type='hidden' value=game.stars disabled)
    tr(class="edit edit-#{index}")
      td
      td
        p Your Review
      td(colspan="2")
-       textarea(name='your-review' class="editable-item editable-item-#{index}" disabled) #{game.review}
+       textarea(name='your_review' class="editable-item editable-item-#{index}" disabled) #{game.review}
    tr(class="edit-submit  edit-submit-#{index}")
      td(colspan="4")
-       input(type='hidden' class="editable-item editable-item-#{index}" name="selected-game-to-edit" value=game.title disabled)
-       input(type='hidden' class="editable-item editable-item-#{index}" name='selected-console-to-edit' value=game.console disabled)
+       input(type='hidden' class="editable-item editable-item-#{index}" name="selected_game_to_edit" value=game.title disabled)
+       input(type='hidden' class="editable-item editable-item-#{index}" name='selected_console_to_edit' value=game.console disabled)
        if session.username === params
          input(id='make-changes' type='submit' class='button' value='Make Changes')

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "prestart": "npm install",
+    "pretest": "npm install",
     "start": "node ./bin/www",
     "test": "grunt"
   },
@@ -28,9 +29,11 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
     "grunt-express-server": "^0.5.1",
     "grunt-simple-mocha": "^0.4.1",
     "mocha": "^2.3.4",
+    "should": "^8.1.1",
     "supertest": "^1.1.0"
   }
 }

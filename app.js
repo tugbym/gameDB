@@ -7,24 +7,21 @@ var express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     session = require('express-session'),
-    flash = require('connect-flash');
-
-var index = require('./routes/index'),
+    flash = require('connect-flash'),
+    index = require('./routes/index'),
     login = require('./routes/login'),
     logout = require('./routes/logout'),
     register = require('./routes/register'),
     profile = require('./routes/profile'),
-    add_game = require('./routes/add_game');
+    add_game = require('./routes/add_game'),
+    Profile = require('./models/profile-model'),
+    mongo_login = require('./mongo_login'),
+    app = express();
 
-var Profile = require('./models/profile-model'),
-    mongo_login = require('./mongo_login');
-
-var app = express();
-
-if (app.get('env') === 'development') {
-    mongoose.connect('mongodb://localhost/GameDB');
-} else {
+if (app.get('env') === 'production') {
     mongoose.connect(mongo_login.getMongoLogin);
+} else {
+    mongoose.connect('mongodb://localhost/GameDB');
 }
 
 // view engine setup
@@ -33,7 +30,10 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
+if(app.get('env') === 'development') {
+    app.use(logger('dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

@@ -8,11 +8,11 @@ block content
     .container
       .search
         .container
-          form(name='search-form', method='post')
+          form(name='search_form', method='post')
               span Search
-              input(type='text' name='search-query')
+              input(type='text' name='search_query')
               span Search By
-              select(name='search-by')
+              select(name='search_by')
                 option(value='game') Title
                 option(value='console') Console
                 option(value='genre') Genre
@@ -29,7 +29,7 @@ block content
                   tr
                     td
                       form(name="add-game-form-#{index1}-#{index2}" method='post')
-                        input(id='game' type='text' name="selected-game" value=result.title readonly)
-                        input(id='console' type='text' name='selected-console' value=platform.abbreviation readonly)
+                        input(id='game' type='text' name="selected_game" value=result.title readonly)
+                        input(id='console' type='text' name='selected_console' value=platform.abbreviation readonly)
                         input(id='add' type='submit' value="Add Game")
           p=message
