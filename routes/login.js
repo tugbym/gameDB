@@ -10,10 +10,19 @@ router.get('/', function(req, res, next) {
     res.render('login', { error: err });
 });
 
-router.post('/',
-            passport.authenticate('local', { successRedirect: '/',
-                                             failureRedirect: '/login',
-                                             failureFlash: true})
-);
+function isAlreadyLoggedIn(req, res, next) {
+  if (req.session.passport) {
+      if(req.session.passport.user) {
+          res.status(403);
+          return res.render('login', { error: 'You are already logged in.' });
+      } else {
+          next();
+      }
+  } else {
+      next();
+  }
+}
+
+router.post('/', isAlreadyLoggedIn, passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', failureFlash: true }));
 
 module.exports = router;

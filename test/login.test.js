@@ -28,4 +28,16 @@ describe('Login Route', function() {
         });
     });
     
+    it('Should not let a user create another session when already logged in', function(done) {
+        agent.post('/login').send({
+            username: 'testing',
+            password: 'testing'
+        }).then(function() {
+            agent.post('/login').send({
+                username: 'testing',
+                password: 'testing'
+            }).expect(403, done);
+        });
+    });
+    
 });

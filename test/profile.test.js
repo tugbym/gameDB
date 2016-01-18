@@ -164,15 +164,17 @@ describe('Profile Route', function() {
         
         it('Should list received requests on user profile', function(done) {
             
-            agent.post('/login').send({
-                username: 'testing2',
-                password: 'testing2'
-            }).then(function() {
-                agent.get('/profile/testing2').expect(200).end(function(err, res) {
-                    res.text.toString().search('Received Requests').should.not.equal(-1);
-                    res.text.toString().search('testing').should.not.equal(-1);
-                    res.text.toString().search('Accept Request').should.not.equal(-1);
-                    done();
+            agent.get('/logout').then(function() {
+                agent.post('/login').send({
+                    username: 'testing2',
+                    password: 'testing2'
+                }).then(function() {
+                    agent.get('/profile/testing2').expect(200).end(function(err, res) {
+                        res.text.toString().search('Received Requests').should.not.equal(-1);
+                        res.text.toString().search('testing').should.not.equal(-1);
+                        res.text.toString().search('Accept Request').should.not.equal(-1);
+                        done();
+                    });
                 });
             });
             
@@ -204,14 +206,16 @@ describe('Profile Route', function() {
         
         it('Friend should have their sent request changed into a mutual friend', function(done) {
             
-            agent.post('/login').send({
-                username: 'testing',
-                password: 'testing'
-            }).then(function() {
-                agent.get('/profile/testing').expect(200).end(function(err, res) {
-                    res.text.toString().search('Mutual Friends').should.not.equal(-1);
-                    res.text.toString().search('Sent Requests').should.equal(-1);
-                    done();
+            agent.get('/logout').then(function() {
+                agent.post('/login').send({
+                    username: 'testing',
+                    password: 'testing'
+                }).then(function() {
+                    agent.get('/profile/testing').expect(200).end(function(err, res) {
+                        res.text.toString().search('Mutual Friends').should.not.equal(-1);
+                        res.text.toString().search('Sent Requests').should.equal(-1);
+                        done();
+                    });
                 });
             });
             
