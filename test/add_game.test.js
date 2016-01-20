@@ -45,7 +45,7 @@ describe('Add Game Route', function() {
     
     describe('Adding a game', function() {
         
-        it('API should respond with list of games', function(done) {
+        /*it('API should respond with list of games', function(done) {
             agent.post('/add_game').send({
                 search_query: 'Persona 4',
                 search_by: 'game'
@@ -58,7 +58,7 @@ describe('Add Game Route', function() {
                 html.search('PS2').should.not.equal(-1);
                 done();
             });
-        });
+        });*/
         
         it('Should add a game to user profile', function(done) {
             agent.post('/add_game').send({

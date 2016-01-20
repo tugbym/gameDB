@@ -102,10 +102,10 @@ router.post('/:username', function(req, res, next) {
         
         Profile.editGameInfo(id, informationToAdd, function(err, response) {
             if(err) {
-                response = "There was a problem adding your statistics to this game from your list. Please try again later.";
-                return res.render('profile', { params: username, response: response });
+                res.render('profile', { params: username, response: err.message });
+            } else {
+                res.redirect('/profile/' + username);
             }
-            res.redirect('/profile/' + username);
         });
         
     }
@@ -120,9 +120,11 @@ router.post('/:username/add_friend', function(req, res, next) {
     
     Profile.sendFriendRequest(username, friend, function(err, response) {
         if(err) {
-            return res.render('profile', { params: friend, response: response });
+            res.status(err.status);
+            res.render('profile', { params: username, response: err.message });
+        } else {
+            res.redirect('/profile/' + friend);
         }
-        res.redirect('/profile/' + friend);
     });
     
 });
@@ -140,12 +142,86 @@ router.post('/:username/accept_request', function(req, res, next) {
     
     Profile.acceptFriendRequest(username, friend, function(err, response) {
         if(err) {
-            return res.render('profile', { params: username, response: response });
+            res.status(err.status);
+            res.render('profile', { params: username, response: err.message });
+        } else {
+            res.redirect('/profile/' + friend);
         }
-        res.redirect('/profile/' + friend);
     });
  
 });
+
+router.post('/:username/cancel_request', function(req, res, next) {
+    
+    logInCheck(req.session.passport, next);
+    
+    var friend,
+        username = req.session.passport.user.username;
+    
+    if(req.body.sent_request) {
+        friend = req.body.sent_request;
+    } else {
+        friend = req.params.username;
+    }   
+    
+    Profile.cancelFriendRequest(username, friend, function(err, response) {
+        if(err) {
+            res.status(err.status);
+            res.render('profile', { params: username, response: err.message });
+        } else {
+            res.redirect('/profile/' + friend);
+        }
+    });
+    
+});
+
+router.post('/:username/decline_request', function(req, res, next) {
+    
+    logInCheck(req.session.passport, next);
+    
+    var friend,
+        username = req.session.passport.user.username;
+    
+    if(req.body.received_request) {
+        friend = req.body.received_request;
+    } else {
+        friend = req.params.username;
+    }
+    
+    Profile.declineFriendRequest(username, friend, function(err, response) {
+        if(err) {
+            res.status(err.status);
+            res.render('profile', { params: username, response: err.message });
+        } else {
+            res.redirect('/profile/' + friend);
+        }
+    });
+    
+});
+
+router.post('/:username/remove_friend', function(req, res, next) {
+    
+    logInCheck(req.session.passport, next);
+    
+    var friend,
+        username = req.session.passport.user.username;
+    
+    if(req.body.mutual_friend) {
+        friend = req.body.mutual_friend;
+    } else {
+        friend = req.params.username;
+    }
+    
+    Profile.removeFriend(username, friend, function(err, response) {
+        if(err) {
+            res.status(err.status);
+            res.render('profile', { params: username, response: err.message });
+        } else {
+            res.redirect('/profile/' + friend);
+        }
+    
+});
+    });
 
 function logInCheck(session, next) {
     

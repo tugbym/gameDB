@@ -53,29 +53,33 @@ html
                     table
                       tr
                         td
-                          a(href="/profile/#{mutual}")=mutual
+                          input(id='mutual-friend' type='text' name='mutual_friend' value=mutual readonly)
                         td
-                          p Offline
+                          input(id='remove_friend' type='submit' class='button' value='Remove Friend')
             if session.profile.sentRequests[0]                
               h4 Sent Requests           
               each sent, index in session.profile.sentRequests
                 fieldset
-                  form(name="edit-sent-requests-form-#{index}" method='post')
+                  form(name="edit-sent-requests-form-#{index}" method='post' action='/profile/' + params + '/cancel_request')
                     table
                       tr
                         td
-                          a(href="/profile/#{sent}")=sent
+                          input(id='sent-request' type='text' name='sent_request' value=sent readonly)
+                        td
+                          input(id='cancel-request' type='submit' class='button' value='Cancel Request')
             if session.profile.receivedRequests[0]
               h4 Received Requests
               each received, index in session.profile.receivedRequests
                 fieldset
-                  form(name="edit-received-requests-form-#{index}" method='post' action='/profile/' + params + '/accept_request')
+                  form(name="edit-received-requests-form-#{index}" method='post')
                     table
                       tr
                         td
-                          input(id='received-request' type='text' name='received-request' value=received readonly)
+                          input(id='received-request' type='text' name='received_request' value=received readonly)
                         td
-                          input(id='accept-request' type='submit' class='button' value='Accept Request')
+                          input(id='accept-request' type='submit' class='button' value='Accept Request' formaction='/profile/' + params + '/accept_request')
+                        td
+                          input(id='decline-request' type='submit' class='button' value='Decline Request' formaction='/profile/' + params + '/decline_request')
       block content
       .footer
         .container

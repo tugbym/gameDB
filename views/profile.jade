@@ -50,10 +50,19 @@ block content
           fieldset
             form(name="accept-friend-form" method='post' action='/profile/' + params + '/accept_request')
               input(id='accept-friend' type='submit' class='button' value='Accept Friend Request')
+          fieldset
+            form(name="decline-friend-form" method='post' action='/profile/' + params + '/decline_request')
+              input(id='decline-friend' type='submit' class='button' value='Decline Friend Request')
         else if sentReqFlag
           p This user has received your friend request.
+          fieldset
+            form(name="cancel-request-form" method='post' action='/profile/' + params + '/cancel_request')
+              input(id='cancel-request' type='submit' class='button' value='Cancel Friend Request')
         else if mutualFlag
           p You are friends with this user.
+          fieldset
+            form(name="remove-friend-form" method='post' action='/profile/' + params + '/remove_friend')
+              input(id='remove-friend' type='submit' class='button' value='Remove Friend')
         else
           fieldset
             form(name="add-friend-form" method='post' action='/profile/' + params + '/add_friend')

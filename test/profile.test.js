@@ -162,18 +162,35 @@ describe('Profile Route', function() {
             
         });
         
+        it('Should cancel sent request', function(done) {
+            
+            agent.post('/profile/testing2/cancel_request').then(function() {
+                agent.get('/profile/testing2').expect(200).end(function(err, res) {
+                    res.text.toString().search('This user has received your friend request.').should.equal(-1);
+                    res.text.toString().search('Send Friend Request').should.not.equal(-1);
+                    agent.get('/profile/testing').expect(200).end(function(err, res) {
+                        res.text.toString().search('Sent Requests').should.equal(-1);
+                        done();
+                    });
+                });
+            });
+            
+        });
+        
         it('Should list received requests on user profile', function(done) {
             
-            agent.get('/logout').then(function() {
-                agent.post('/login').send({
-                    username: 'testing2',
-                    password: 'testing2'
-                }).then(function() {
-                    agent.get('/profile/testing2').expect(200).end(function(err, res) {
-                        res.text.toString().search('Received Requests').should.not.equal(-1);
-                        res.text.toString().search('testing').should.not.equal(-1);
-                        res.text.toString().search('Accept Request').should.not.equal(-1);
-                        done();
+            agent.post('/profile/testing2/add_friend').then(function() {
+                agent.get('/logout').then(function() {
+                    agent.post('/login').send({
+                        username: 'testing2',
+                        password: 'testing2'
+                    }).then(function() {
+                        agent.get('/profile/testing2').expect(200).end(function(err, res) {
+                            res.text.toString().search('Received Requests').should.not.equal(-1);
+                            res.text.toString().search('testing').should.not.equal(-1);
+                            res.text.toString().search('Accept Request').should.not.equal(-1);
+                            done();
+                        });
                     });
                 });
             });
@@ -189,15 +206,39 @@ describe('Profile Route', function() {
             
         });
         
-        it('Should accept the received request and turn request into a mutual friend', function(done) {
+        it('Should decline received request', function(done) {
             
-            agent.post('/profile/testing/accept_request').then(function() {
+            agent.post('/profile/testing/decline_request').then(function() {
                 agent.get('/profile/testing').expect(200).end(function(err, res) {
-                    res.text.toString().search('You are friends with this user.').should.not.equal(-1);
+                    res.text.toString().search('Accept Friend Request').should.equal(-1);
+                    res.text.toString().search('Decline Friend Request').should.equal(-1);
                     agent.get('/profile/testing2').expect(200).end(function(err, res) {
-                        res.text.toString().search('Mutual Friends').should.not.equal(-1);
                         res.text.toString().search('Received Requests').should.equal(-1);
                         done();
+                    });
+                });
+            });
+            
+        });
+        
+        it('Should accept the received request and turn request into a mutual friend', function(done) {
+            
+            agent.post('/profile/testing/add_friend').then(function() {
+                agent.get('/logout').then(function() {
+                    agent.post('/login').send({
+                        username: 'testing',
+                        password: 'testing'
+                    }).then(function() {
+                        agent.post('/profile/testing2/accept_request').then(function() {
+                            agent.get('/profile/testing2').expect(200).end(function(err, res) {
+                                res.text.toString().search('You are friends with this user.').should.not.equal(-1);
+                                agent.get('/profile/testing').expect(200).end(function(err, res) {
+                                    res.text.toString().search('Mutual Friends').should.not.equal(-1);
+                                    res.text.toString().search('Received Requests').should.equal(-1);
+                                    done();
+                                });
+                            });
+                        });
                     });
                 });
             });
@@ -208,10 +249,10 @@ describe('Profile Route', function() {
             
             agent.get('/logout').then(function() {
                 agent.post('/login').send({
-                    username: 'testing',
-                    password: 'testing'
+                    username: 'testing2',
+                    password: 'testing2'
                 }).then(function() {
-                    agent.get('/profile/testing').expect(200).end(function(err, res) {
+                    agent.get('/profile/testing2').expect(200).end(function(err, res) {
                         res.text.toString().search('Mutual Friends').should.not.equal(-1);
                         res.text.toString().search('Sent Requests').should.equal(-1);
                         done();
@@ -219,6 +260,57 @@ describe('Profile Route', function() {
                 });
             });
             
+        });
+        
+        it('Should remove mutual friend', function(done) {
+            
+            agent.post('/profile/testing/remove_friend').then(function() {
+                agent.get('/profile/testing').expect(200).end(function(err, res) {
+                    res.text.toString().search('You are friends with this user.').should.equal(-1);
+                    res.text.toString().search('Send Friend Request').should.not.equal(-1);
+                    agent.get('/profile/testing2').expect(200).end(function(err, res) {
+                        res.text.toString().search('Mutual Friends').should.equal(-1);
+                        done();
+                    });
+                });
+            });
+            
+        });
+        
+        it('Should not send a request to a user that does not exist', function(done) {
+            agent.post('/profile/not_a_user/add_friend').expect(404, done);
+        });
+        
+        it('Should not accept a request from a user that does not exist', function(done) {
+            agent.post('/profile/not_a_user/accept_request').expect(404, done);
+        });
+        
+        it('Should not accept a request from a user that has not sent a request', function(done) {
+            agent.post('/profile/testing/accept_request').expect(403, done);
+        });
+        
+        it('Should not cancel a request from a user that does not exist', function(done) {
+            agent.post('/profile/not_a_user/cancel_request').expect(404, done);
+        });
+        
+        it('Should not cancel a request from a user that has not sent a request', function(done) {
+            agent.post('/profile/testing/cancel_request').expect(403, done);
+        });
+        
+        it('Should not decline a request from a user that does not exist', function(done) {
+            agent.post('/profile/not_a_user/decline_request').expect(404, done);
+        });
+        
+        it('Should not decline a request from a user that has not sent a request', function(done) {
+            agent.post('/profile/testing/decline_request').expect(403, done);
+        });
+        
+        it('Should not remove a mutual friend that does not exist', function(done) {
+            agent.post('/profile/not_a_user/remove_friend').expect(404, done);
+        });
+        
+        it('Should not remove a mutual friend that is not a mutual friend', function(done) {
+            agent.post('/profile/testing/remove_friend').expect(403, done);
         });
         
         after(function(done) {
