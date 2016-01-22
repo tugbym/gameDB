@@ -3,7 +3,6 @@
 body {
     background-color: black;
     color: white;
-    height: 100vh;
     font-family: Orbitron, Verdana, sans-serif;
 }
 
@@ -13,12 +12,12 @@ body {
 
 .wrapper {
     width: 100%;
-	min-height: 100%;
+	min-height: 90vh;
 	position: relative;
 }
 
 .main {
-    padding-top: 6%;
+    padding-top: 12vh;
     padding-bottom: 50px;
     text-align: center;
 }
@@ -45,33 +44,48 @@ body {
     position: fixed;
 }
 
+.header .container {
+    height: 100%;
+}
+
 .logo {
+    height: 100%;
     width: 20%;
     float: left;
 }
 
-.logo .container img {
-    display: inline;
+.logo .container {
+    position: relative;
 }
 
-.logo {
-    margin: 30px 0;
+.logo .container img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto 0;
+    max-width: 100%;
+    height: auto;
 }
 
 .nav {
+    height: 100%;
     width: 80%;
-    margin-top: 40px;
     float: right;
+    position: relative;
 }
 
 .nav .container {
     text-align: right;
+    position: absolute;
+    height: 2em;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
 }
 
 .nav ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .nav li {
@@ -90,6 +104,9 @@ body {
     font-weight: 400;
     text-shadow: 2px 2px black;
     line-height: 23px;
+}
+
+.friends-btn {
     vertical-align: top;
 }
 
@@ -101,7 +118,7 @@ body {
 
 /* Friends */
 
-.btn:focus {
+.friends-btn:focus {
     color: white;
 }
 
@@ -182,60 +199,4 @@ body {
 
 .footer a {
     margin: 10px;
-}
-
-/* Media Queries */
-
-@media (max-width:1025px) {
-    
-    .logo {
-        margin: 10px 0;
-        float: none;
-        width: 100%;
-    }
-    
-    .logo .container img {
-        display: block;
-        margin: 0 auto;
-    }
-    
-    .nav {
-        width: 100%;
-        float: none;
-        margin-top: 0;
-    }
-    
-    .nav .container {
-        text-align: center;
-    }
-    
-    .friends td {
-        display: block;
-        margin: 10px 0;
-    }
-    
-    .nav li {
-        display: block;
-    }
-    
-    .nav span {
-        display: none;
-    }
-    
-    .nav button {
-        margin-left: 30px;
-    }
-    
-    .nav button span {
-        display: inline;
-    }
-    
-    .header {
-        height: 22vh;
-    }
-    
-    .main {
-        padding-top: 17vh;
-    }
-    
 }

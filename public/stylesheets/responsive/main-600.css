@@ -1,0 +1,35 @@
+/* Jumbotron */
+
+.jumbotron {
+    height: 300px;
+}
+
+.jumbotron .container {
+    margin-top: 100px;
+}
+
+.jumbotron h1 {
+    font-size: 1em;
+    line-height: 2px;
+}
+
+.jumbotron a {
+    margin-top: 0.5em;
+    padding: 5px 10px;
+    font-size: 0.6em;
+}
+
+.arrow .down {
+    padding: .30em;
+    border-width: 0 .2em .2em 0;
+}
+
+/* Information Globals */
+
+.information h2 {
+    font-size: 0.9em;
+}
+
+div[class^="information"] p, .information2 span {
+    font-size: 0.6em;
+}

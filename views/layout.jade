@@ -2,11 +2,21 @@ doctype html
 html
   head
     title GameDB
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width')
+    
     link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Orbitron")
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
     link(rel='stylesheet', href='/stylesheets/global.css')
     link(rel='stylesheet', href='/stylesheets/social.css')
+    link(rel='stylesheet', href='/stylesheets/responsive/global-1200.css', media='screen and (max-width: 1200px)')
+    link(rel='stylesheet', href='/stylesheets/responsive/global-1080.css', media='screen and (max-width: 1080px)')
+    link(rel='stylesheet', href='/stylesheets/responsive/global-900.css', media='screen and (max-width: 900px)')
+    link(rel='stylesheet', href='/stylesheets/responsive/global-600.css', media='screen and (max-width: 600px)')
+    link(rel='stylesheet', href='/stylesheets/responsive/global-landscape.css', media='screen and (max-width: 600px) and (orientation: landscape)')
+    
+    
     block scripts
     script(src='/javascripts/global.js')
   body
@@ -87,4 +97,4 @@ html
             span(class="fa fa-facebook")
           a(class="btn btn-social-icon btn-twitter")
             span(class="fa fa-twitter")
-          p &copy; Michael Tugby. Created in 2015.
+          p &copy; Michael Tugby. 2015-2016.

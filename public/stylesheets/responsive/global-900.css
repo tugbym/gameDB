@@ -1,0 +1,11 @@
+/* Header */
+
+.nav li a, .friends-btn {
+    font-size: 1em;
+}
+
+/* Footer */
+
+.footer a, .footer p {
+    font-size: 0.8em;
+}

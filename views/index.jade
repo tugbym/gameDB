@@ -2,6 +2,10 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/main.css')
+  link(rel='stylesheet', href='/stylesheets/responsive/main-1200.css', media='screen and (max-width: 1200px)')
+  link(rel='stylesheet', href='/stylesheets/responsive/main-1080.css', media='screen and (max-width: 1080px)')
+  link(rel='stylesheet', href='/stylesheets/responsive/main-900.css', media='screen and (max-width: 900px)')
+  link(rel='stylesheet', href='/stylesheets/responsive/main-600.css', media='screen and (max-width: 600px)')
   script(src="/javascripts/main.js")
 
 block content
@@ -20,54 +24,60 @@ block content
         h2 How It Works
         .row
           .col-md-6
-            p You can search for games using our search form. We use Giantbomb’s API to retrieve a database of video games. Simply click “Add Game” to the game you want to add, and it will be added to your collection on your profile. It’s that simple!
-          .col-md-6 
-            img(class="pic" src="../images/pic1.jpg")
-        img(class="icon" src="../images/icon1.svg")
+            .container
+              p You can search for games using our search form. We use Giantbomb’s API to retrieve a database of video games. Simply click “Add Game” to the game you want to add, and it will be added to your collection on your profile. It’s that simple!
+          .col-md-6
+            .container
+              img(class="pic" src="../images/pic1.jpg")
+          img(class="icon" src="../images/icon1.svg")
     
     .information2
       .container
         .row
           .col-md-7
-            img(class="pic" src="../images/pic2.jpg")
+            .container
+              img(class="pic" src="../images/pic2.jpg")
           .col-md-5
-            p You may add certain statistics to each game in your collection. These include such things as: 
-            table
-              tr
-                td
-                  span(class="glyphicon glyphicon-chevron-right") 
-                td
-                  span Achievements 
-              tr
-                td 
-                  span(class="glyphicon glyphicon-chevron-right") 
-                td 
-                  span Your Progress 
-              tr
-                td 
-                  span(class="glyphicon glyphicon-chevron-right") 
-                td 
-                  span Things to Do 
-              tr
-                td 
-                  span(class="glyphicon glyphicon-chevron-right") 
-                td
-                  span Your Rating 
-              tr
-                td 
-                  span(class="glyphicon glyphicon-chevron-right") 
-                td 
-                  span Your Review
-            p All games can be grouped into a “Currently playing” and “Finished playing” section. You can add friends to your profile, and browse their collections too!
-        img(class="icon" src="../images/icon2.svg")
+            .container
+              p You may add certain statistics to each game in your collection. These include such things as: 
+              table
+                tr
+                  td
+                    span(class="glyphicon glyphicon-chevron-right") 
+                  td
+                    span Achievements 
+                tr
+                  td 
+                    span(class="glyphicon glyphicon-chevron-right") 
+                  td 
+                    span Your Progress 
+                tr
+                  td 
+                    span(class="glyphicon glyphicon-chevron-right") 
+                  td 
+                    span Things to Do 
+                tr
+                  td 
+                    span(class="glyphicon glyphicon-chevron-right") 
+                  td
+                    span Your Rating 
+                tr
+                  td 
+                    span(class="glyphicon glyphicon-chevron-right") 
+                  td 
+                    span Your Review
+              p All games can be grouped into a “Currently playing” and “Finished playing” section. You can add friends to your profile, and browse their collections too!
+          img(class="icon" src="../images/icon2.svg")
         
     .information3
       .container
         .row
-          .col-md-6
-            p You will also be given recommendations for different games for you to try out based on those that are in your collection. This could help you to discover a new game you like that you never even knew existed! 
-            p Any games that you do not own, but wish to can be added to your own wishlist. 
-            p All of this can be shared through Facebook and Twitter, to your friends on those sites, so that they can see what games you are playing.
-          .col-md-6
-            img(class="pic" src="../images/pic3.jpg")
-        img(class="icon" src="../images/icon3.svg")
+          .col-md-5
+            .container
+              p You will also be given recommendations for different games for you to try out based on those that are in your collection. This could help you to discover a new game you like that you never even knew existed! 
+              p Any games that you do not own, but wish to can be added to your own wishlist. 
+              p All of this can be shared through Facebook and Twitter, to your friends on those sites, so that they can see what games you are playing.
+          .col-md-7
+            .container
+              img(class="pic" src="../images/pic3.jpg")
+          img(class="icon" src="../images/icon3.svg")

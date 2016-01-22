@@ -1,0 +1,48 @@
+/* Jumbotron */
+
+.jumbotron {
+    height: 750px;
+}
+
+.jumbotron .container {
+    margin-top: 300px;
+}
+
+.jumbotron h1 {
+    font-size: 3em;
+    line-height: 30px;
+}
+
+/* Information Globals */
+
+.information .col-md-6 {
+    height: auto;
+}
+
+div[class^="information"] {
+    margin: 100px 0;
+}
+
+div[class^="information"] p {
+    text-align: center;
+}
+
+div[class^="col-md"] {
+    height: auto;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+div[class^="information"] .pic {
+    margin: 10px auto;
+}
+
+/* Information Individuals */
+
+.information h2 {
+    margin-bottom: 40px;
+}
+
+.information2 table {
+    margin: 10px auto;
+}

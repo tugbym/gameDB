@@ -1,0 +1,21 @@
+/* Header */
+
+.nav li a, .friends-btn {
+    font-size: 1.1em;
+}
+
+/* Footer */
+
+.footer a, .footer p {
+    font-size: 0.9em;
+}
+
+.btn-social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-social-icon>:first-child {
+    line-height: 20px;
+    font-size: 1.2em;
+}

@@ -1,0 +1,50 @@
+/* Jumbotron */
+
+.jumbotron {
+    height: 450px;
+}
+
+.jumbotron .container {
+    margin-top: 200px;
+}
+
+.jumbotron h1 {
+    font-size: 1.5em;
+    line-height: 15px;
+}
+
+.jumbotron a {
+    padding: 5px 10px;
+    font-size: 0.7em;
+}
+
+.arrow {
+    margin-top: 1.5em;
+}
+
+.arrow .down {
+    padding: .30em;
+    border-width: 0 .2em .2em 0;
+}
+
+/* Information Globals */
+
+.information h2 {
+    font-size: 1.1em;
+}
+
+div[class^="information"] {
+    line-height: 0;
+}
+
+div[class^="information"] .pic {
+    height: 50%;
+}
+
+div[class^="information"] p, .information2 span {
+    font-size: 0.7em;
+}
+
+.information2 td {
+    margin: 0;
+}

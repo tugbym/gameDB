@@ -1,0 +1,23 @@
+/* Header */
+
+.nav span {
+    display: none;
+}
+
+.nav button span {
+    display: inline;
+}
+
+.nav li {
+    padding-right: 15px;
+}
+
+.nav li a, .friends-btn {
+    font-size: 0.8em;
+}
+
+/* Footer */
+
+.footer a, .footer p {
+    font-size: 0.6em;
+}
