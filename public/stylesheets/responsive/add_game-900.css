@@ -1,0 +1,7 @@
+.search span, input, select, option {
+    font-size: 0.8em;
+}
+
+.results p {
+    font-size: 0.8em;
+}

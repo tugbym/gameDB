@@ -1,0 +1,11 @@
+.games td:second-child, .games th:second-child {
+    width: 35vw;
+}
+
+.games input, .games span, #add-game {
+    font-size: 0.9em;
+}
+
+.edit p, .edit input, .edit textarea {
+    font-size: 0.9em;
+}

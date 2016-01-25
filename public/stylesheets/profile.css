@@ -1,5 +1,13 @@
 /* Games Table */
 
+.response {
+    margin-top: 50px;
+}
+
+.main h3 {
+    font-size: 1.5em;
+}
+
 .games {
     width: 100%;
     text-align: center;
@@ -7,19 +15,20 @@
 }
 
 .games h3 {
-    margin-top: 10vh;
-    margin-bottom: 40px;
     text-align: center;
 }
 
 .games table {
     margin: 0 auto;
-    width: 100%;
 }
 
 .games td, .games th {
     width: 25vw;
     text-align: left;
+}
+
+.games th:first-child, .games td:first-child {
+    width: 10vw;
 }
 
 .glyphicon-pencil {
@@ -32,11 +41,16 @@
 }
 
 .games a {
+    font-size: 1em;
     margin-top: 10px;
 }
 
 .games input {
-    line-height: 17px;
+    font-size: 1em;
+}
+
+.games span {
+    font-size: 1em;
 }
 
 /* Games */
@@ -47,10 +61,18 @@
     border: none;
 }
 
+#add-game {
+    font-size: 1em;
+}
+
 .button {
     background-color: transparent;
     border: 1px solid;
-    padding: 3px;
+    font-size: 1em;
+    height: 20px;
+    padding: 5px;
+    line-height: 10px;
+    display: inline-block;
 }
 
 .show-extras {
@@ -84,6 +106,10 @@
 
 #edit-table td {
     padding-left: 20px;
+}
+
+.edit p, .edit input, .edit textarea {
+    font-size: 1em;
 }
 
 .edit, .edit-submit {
@@ -124,66 +150,4 @@
 
 .edit textarea {
     color: black;
-}
-
-/* Media Queries */
-
-@media(max-width: 1200px) {
-    
-    .games table {
-        width: 100vw;
-    }
-    
-    .games td:second-child, .games th:second-child {
-        width: 35vw;
-    }
-    
-}
-
-@media(max-width: 1025px) {
-    
-    .container {
-        padding: 0;
-        margin: 0;
-    }
-    
-    .games table {
-        margin-top: 10vh;
-    }
-    
-    .games td {
-        text-align: center;
-        width: 100%;
-        display: inline-block;
-        margin: 5px 0;
-    }
-    
-    .games input {
-        display: inline-block;
-        text-align: center;
-    }
-    
-    #table-head {
-        display: none;
-    }
-    
-    .glyphicon-pencil {
-        padding: 0;
-        text-align: center;
-    }
-    
-    #edit-table td {
-        padding-left: 0;
-    }
-    
-    #edit-table p {
-        text-align: center;
-    }
-    
-    .edit-submit {
-        margin: 0;
-        padding: 0;
-    }
-}
-    
 }

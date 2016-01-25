@@ -2,6 +2,9 @@ extends layout
 
 block scripts
   link(rel='stylesheet', href='/stylesheets/add_game.css')
+  link(rel='stylesheet', href='/stylesheets/responsive/add_game-1200.css', media='screen and (max-width: 1200px)')
+  link(rel='stylesheet', href='/stylesheets/responsive/add_game-1080.css', media='screen and (max-width: 1080px)')
+  link(rel='stylesheet', href='/stylesheets/responsive/add_game-900.css', media='screen and (max-width: 900px)')
 
 block content
   .main
@@ -23,7 +26,8 @@ block content
           if results
             table
               tr
-                th Search Results
+                th 
+                  span Search Results
               each result, index1 in results
                 each platform, index2 in result.platforms
                   tr

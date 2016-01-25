@@ -1,0 +1,46 @@
+.container {
+    padding: 0;
+    margin: 0;
+}
+
+.games table {
+    margin-top: 5vh;
+}
+
+.games td, .games th {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.games td:first-child {
+    width: 100%;
+}
+
+.games input {
+    display: inline-block;
+    text-align: center;
+}
+
+.glyphicon-pencil {
+    padding: 0;
+    text-align: center;
+}
+
+#table-head {
+    display: none;
+}
+
+#edit-table td {
+    padding-left: 0;
+}
+
+#edit-table p {
+    text-align: center;
+}
+
+.edit-submit {
+    margin: 0;
+    padding: 0;
+}

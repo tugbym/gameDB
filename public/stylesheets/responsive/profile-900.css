@@ -1,0 +1,7 @@
+.games input, .games span, #add-game {
+    font-size: 0.8em;
+}
+
+.edit p, .edit input, .edit textarea {
+    font-size: 0.8em;
+}

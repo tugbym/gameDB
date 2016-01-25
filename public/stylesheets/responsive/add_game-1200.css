@@ -1,0 +1,11 @@
+.search {
+    margin-top: 10vh;
+}
+
+.search span, input, select, option {
+    font-size: 0.9em;
+}
+
+.results p {
+    font-size: 0.9em;
+}

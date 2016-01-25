@@ -1,0 +1,19 @@
+.main table {
+    width: 60%;
+}
+
+.main h2 {
+    font-size: 1.75em;
+}
+
+.main span {
+    font-size: 0.9em;
+}
+
+.main input {
+    font-size: 0.9em;
+}
+
+.main .container {
+    max-width: 75%;
+}

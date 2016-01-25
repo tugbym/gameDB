@@ -34,8 +34,9 @@
 }
 
 .nav .container {
-    padding-left: 40px;
     text-align: center;
+    padding-right: 0;
+    padding-left: 30px;
 }
 
 .nav ul {

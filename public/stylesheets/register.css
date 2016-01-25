@@ -9,12 +9,12 @@
 }
 
 .main table {
-    width: 45%;
+    width: 35%;
     margin: 20px auto;
 }
 
 .main .input {
-    width: 80%;
+    width: 75%;
     border: 1px solid white;
     border-radius: 5px;
 }
@@ -26,7 +26,6 @@
 .main .input:valid {
     border-color: #2ECC71;
     color: #2ECC71;
-    
 }
 
 .main .input:invalid {
@@ -56,6 +55,7 @@
 }
 
 .main input {
+    font-size: 1em;
     margin: 5px 0;
     color: black;
 }
@@ -63,6 +63,7 @@
 .main span {
     padding: 10px;
     text-shadow: 2px 2px black;
+    font-size: 1em;
 }
 
 .main h2, p {
@@ -70,16 +71,10 @@
     text-shadow: 2px 2px black;
 }
 
-.main p {
-    padding: 5px 0;
+.main h2 {
+    font-size: 2em;
 }
 
-/* Media Queries */
-
-@media(max-width: 700px) {
-    
-    .main table {
-        width: 80%;
-    }
-    
+.main p {
+    padding: 5px 0;
 }
