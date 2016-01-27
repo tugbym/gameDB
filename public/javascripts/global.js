@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 wrapper = document.getElementsByClassName("wrapper")[0],
                 header = document.getElementsByClassName("header")[0],
                 dropdownButton = document.getElementsByClassName("fa")[0],
+                dropdownText = document.getElementsByClassName("friends-btn")[0],
+                aElements = document.getElementsByTagName("a"),
                 display;
             
             //IE only
@@ -21,20 +23,41 @@ document.addEventListener("DOMContentLoaded", function(event) {
             if(display === "none") {
                 friendsDiv.style.display = "block";
                 if(getWidth() <= 1200) {
-                    wrapper.style.width = "75%";
-                    header.style.width = "75%";
-                    friendsDiv.style.width = "25%";
+                    adjustWidths("75%", wrapper);
+                    adjustWidths("75%", header);
+                    adjustWidths("25%", friendsDiv);
+                    if(getWidth() <= 800) {
+                        shrinkElements("0.8em", aElements, dropdownText);
+                    }
+                    if(getWidth() <= 600) {
+                        shrinkElements("0.6em", aElements, dropdownText);
+                    }
                 } else {
-                    wrapper.style.width = "85%";
-                    header.style.width = "85%";
-                    friendsDiv.style.width = "15%";
+                    adjustWidths("85%", wrapper);
+                    adjustWidths("85%", header);
+                    adjustWidths("15%", friendsDiv);
                 }
                 dropdownButton.className = "fa fa-angle-double-left";
             } else {
+                
+                switch(true) {
+                    case getWidth() <= 600:
+                        shrinkElements("0.7em", aElements, dropdownText);
+                        break;
+                    case getWidth() <= 900:
+                        shrinkElements("1em", aElements, dropdownText);
+                        break;
+                    case getWidth() <= 1080:
+                        shrinkElements("1.1em", aElements, dropdownText);
+                        break;
+                    default:
+                        shrinkElements("18px", aElements, dropdownText);
+                }
+                
                 friendsDiv.style.display = "none";
-                friendsDiv.style.width = "100%";
-                wrapper.style.width = "100%";
-                header.style.width = "100%";
+                adjustWidths("100%", wrapper);
+                adjustWidths("100%", header);
+                adjustWidths("100%", friendsDiv);
                 dropdownButton.className = "fa fa-angle-double-down";
             }
         });
@@ -52,4 +75,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
             return document.body.clientWidth;
         }
     }
+    
+    function shrinkElements(size, element1, element2) {
+        for(var i = 1; i < 5; i++) {
+            element1[i].style['font-size'] = size;
+        }
+        element2.style['font-size'] = size;
+    }
+    
+    function adjustWidths(size, element) {
+        element.style.width = size;
+    }
+    
 });
