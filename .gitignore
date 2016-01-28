@@ -1,2 +1,4 @@
 node_modules
+mongo_login.js
+api_key.js
 npm-debug.log
