@@ -22,6 +22,7 @@ router.get('/:username', function(req, res, next) {
               response = "It seems you have no games added. Why not try adding a game?";
               return res.render('profile', { params: username, response: response, profile: profile });
           } else {
+              
               return res.render('profile', { params: username, profile: profile });
           }
         });

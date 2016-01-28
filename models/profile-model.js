@@ -65,11 +65,15 @@ module.exports.addGame = function(id, newGame, callback) {
         var gamesOwned = user.gamesOwned,
             error;
         
-        gamesOwned.forEach(function(gameOwned) {
-            if(gameOwned.title === newGame.title && gameOwned.console === newGame.console) {
-                error = new Error;
-                error.message = "You already have this game added.";
-                error.status = 409;
+        gamesOwned.forEach(function(gamesList, index) {
+            if(gamesList.console === newGame.console) {
+                gamesList.games.forEach(function(game) {
+                    if(game.title === newGame.title) {
+                        error = new Error;
+                        error.message = "You already have this game added.";
+                        error.status = 409;
+                    }
+                });
             }
         });
         
@@ -77,7 +81,19 @@ module.exports.addGame = function(id, newGame, callback) {
             return callback(error);
         }
         
-        gamesOwned.push(newGame);
+        var consolePos;
+        
+        gamesOwned.forEach(function(gamesList, index) {
+            if(gamesList.console === newGame.console) {
+                consolePos = index;
+            }
+        });
+        
+        if(consolePos) {
+            gamesOwned[consolePos].games.push(newGame);
+        } else {
+            gamesOwned.push({ 'console': newGame.console, 'games': [newGame] });
+        }
         
         Profile.update({ 'userID': id }, { 'gamesOwned': gamesOwned }, function(err, update) {
             if(err) {
@@ -102,9 +118,16 @@ module.exports.deleteGame = function(id, gameToDelete, callback) {
         
         var gamesOwned = user.gamesOwned;
         
-        gamesOwned.forEach(function(gameOwned, index) {
-            if(gameOwned.title === gameToDelete.title && gameOwned.console === gameToDelete.console) {
-                gamesOwned.splice(index, 1);
+        gamesOwned.forEach(function(gameList, listIndex) {
+            if(gameList.console === gameToDelete.console) {
+                gameList.games.forEach(function(gameOwned, gameIndex) {
+                    if(gameOwned.title === gameToDelete.title) {
+                        gamesOwned[listIndex].games.splice(gameIndex, 1);
+                    }
+                    if(!gameList.games[0]) {
+                        gamesOwned.splice(listIndex, 1);
+                    }
+                });
             }
         });
         
@@ -130,9 +153,13 @@ module.exports.editGameInfo = function(id, gameInfo, callback) {
         
         var gamesOwned = user.gamesOwned;
         
-        gamesOwned.forEach(function(gameOwned, index) {
-            if(gameOwned.title === gameInfo.title && gameOwned.console === gameInfo.console) {
-                gamesOwned[index] = gameInfo;
+        gamesOwned.forEach(function(gameList, listIndex) {
+            if(gameList.console === gameInfo.console) {
+                gameList.games.forEach(function(gameOwned, gameIndex) {
+                    if(gameOwned.title === gameInfo.title) {
+                        gamesOwned[listIndex].games[gameIndex] = gameInfo;
+                    }
+                });
             }
         });
         

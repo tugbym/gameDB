@@ -3,32 +3,33 @@ document.addEventListener("DOMContentLoaded", function(event) {
     
     for(var i = 0; i < gameInfos.length; i++) {
         
-        var stars = document.getElementById('star-rating-' + i).value,
+        var IDs = gameInfos[i].className.split('button show-extras show-extras-').pop().split('-'),
+            stars = document.getElementById('star-rating-' + IDs[0] + '-' + IDs[1]).value,
             stars2 = stars + 1,
-            edit_toggle = document.getElementsByClassName('edit-toggle-' + i)[0];
+            edit_toggle = document.getElementsByClassName('edit-toggle-' + IDs[0] + '-' + IDs[1])[0];
         
-        showAndHideStars(stars, stars2, i);
+        showAndHideStars(stars, stars2, IDs);
         
         if(edit_toggle) {
             edit_toggle.addEventListener('click', function(event) {
                 var currentIter = event.target.className,
-                    pos = currentIter.split("edit-toggle-").pop(),
-                    editSubmit = document.getElementsByClassName('edit-submit-' + pos)[0],
-                    editInput = document.getElementsByClassName('editable-item-' + pos)[0];
-                toggleDisabled(pos, editSubmit, false);
+                    IDs = currentIter.split("edit-toggle-").pop().split('-'),
+                    editSubmit = document.getElementsByClassName('edit-submit-' + IDs[0] + '-' + IDs[1])[0],
+                    editInput = document.getElementsByClassName('editable-item-' + IDs[0] + '-' + IDs[1])[0];
+                toggleDisabled(IDs, editSubmit, false);
                 if(editInput.disabled) {
-                    removeStars(pos);
+                    removeStars(IDs);
                 } else {
-                    iterateStars(pos);
+                    iterateStars(IDs);
                 }
             });
             
             gameInfos[i].addEventListener('click', function(event) {
                 var currentIter = event.target.className,
-                    pos = currentIter.split("show-extras-").pop(),
-                    editDivs = document.getElementsByClassName('edit-' + pos),
-                    editSubmit = document.getElementsByClassName('edit-submit-' + pos)[0],
-                    editToggle = document.getElementsByClassName('edit-toggle-' + pos)[0],
+                    IDs = currentIter.split("show-extras-").pop().split('-'),
+                    editDivs = document.getElementsByClassName('edit-' + IDs[0] + '-' + IDs[1]),
+                    editSubmit = document.getElementsByClassName('edit-submit-' + IDs[0] + '-' + IDs[1])[0],
+                    editToggle = document.getElementsByClassName('edit-toggle-' + IDs[0] + '-' + IDs[1])[0],
                     stringToReplace;
                 if(editToggle.className.includes('off')) {
                     stringToReplace = editToggle.className.replace(/edit-toggle-off/, 'edit-toggle-on');
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     editSubmit.style.display = "none";
                     divLoop(editDivs);
                 } else {
-                    toggleDisabled(pos, editSubmit, true);
+                    toggleDisabled(IDs, editSubmit, true);
                     event.target.innerHTML = "Hide Statistics";
                     divLoop(editDivs);
                 }
@@ -52,15 +53,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
             gameInfos[i].addEventListener('click', function(event) {
                 
                 var currentIter = event.target.className,
-                    pos = currentIter.split("show-extras-").pop(),
-                    editDivs = document.getElementsByClassName('edit-' + pos),
-                    editSubmit = document.getElementsByClassName('edit-submit-' + pos)[0];
+                    IDs = currentIter.split("show-extras-").pop().split('-'),
+                    editDivs = document.getElementsByClassName('edit-' + IDs[0] + '-' + IDs[1]),
+                    editSubmit = document.getElementsByClassName('edit-submit-' + IDs[0] + '-' + IDs[1])[0];
                 
                 if(editDivs[0].style.display === "table-row") {
                     event.target.innerHTML = "Show Statistics";
                     divLoop(editDivs);
                 } else {
-                    toggleDisabled(pos, editSubmit, true);
+                    toggleDisabled(IDs, editSubmit, true);
                     event.target.innerHTML = "Hide Statistics";
                     divLoop(editDivs);
                 }
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function toggleDisabled(iter, editSubmit, alwaysDisable) {
-        var editInputs = document.getElementsByClassName('editable-item-' + iter);
+        var editInputs = document.getElementsByClassName('editable-item-' + iter[0] + '-' + iter[1]);
         for(var k = 0; k < editInputs.length; k++) {
             if(editInputs[k].disabled && !alwaysDisable) {
                 editInputs[k].disabled = false;
@@ -93,8 +94,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function iterateStars(pos) {
-        var stars = document.getElementsByClassName('star-' + pos),
-            starList = document.getElementById('star-list-' + pos);
+        var stars = document.getElementsByClassName('star-' + pos[0] + '-' + pos[1]),
+            starList = document.getElementById('star-list-' + pos[0] + '-' + pos[1]);
         starList.addEventListener('mouseleave', revertStars);
         for(var h = 0; h < stars.length; h++) {
             stars[h].addEventListener('mouseover', addMouseOver);
@@ -103,8 +104,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     function removeStars(pos) {
-        var stars = document.getElementsByClassName('star-' + pos),
-            starList = document.getElementById('star-list-' + pos);
+        var stars = document.getElementsByClassName('star-' + pos[0] + '-' + pos[1]),
+            starList = document.getElementById('star-list-' + pos[0] + '-' + pos[1]);
         starList.addEventListener('mouseleave', revertStars);
         for(var g = 0; g < stars.length; g++) {
             stars[g].removeEventListener('mouseover', addMouseOver);
@@ -115,24 +116,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function addMouseOver(event) {
         var currentIter = event.target.className,
             iterAndRatingArray = currentIter.split('glyphicon-star-').pop().split('-'),
-            pos = iterAndRatingArray[0],
-            iter = iterAndRatingArray[1],
-            iter2 = parseInt(iter, 10) + 1;
+            iter = iterAndRatingArray[2],
+            iter2 = parseInt(iter, 10) + 1,
+            pos = iterAndRatingArray.splice(0, 2);
+        
         showAndHideStars(iter, iter2, pos);
     }
 
     function addClick(event) {
         var currentIter = event.target.className,
             iterAndRatingArray = currentIter.split('glyphicon-star-').pop().split('-'),
-            iter = iterAndRatingArray[0],
-            rating = parseInt(iterAndRatingArray[1], 10),
-            starRating = document.getElementById('star-rating-' + iter);
+            rating = parseInt(iterAndRatingArray[2], 10),
+            iter = iterAndRatingArray.splice(0, 2),
+            starRating = document.getElementById('star-rating-' + iter[0] + '-' + iter[1]);
         starRating.value = rating;
     }
 
     function revertStars(event) {
-        var pos = event.target.id.split('star-list-').pop(),
-            starRating = document.getElementById('star-rating-' + pos);
+        var pos = event.target.id.split('star-list-').pop().split('-'),
+            starRating = document.getElementById('star-rating-' + pos[0] + '-' + pos[1]);
         if(starRating.value) {
             var iter = parseInt(starRating.value, 10),
                 iter2 = iter + 1;
@@ -142,12 +144,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     function showAndHideStars(iter, iter2, pos) {
         for(iter; 0 < iter; iter--) {
-            var starsToShine = document.getElementsByClassName('glyphicon-star-' + pos + '-' + iter);
-            starsToShine[0].className = 'glyphicon glyphicon-star star-' + pos + ' glyphicon-star-' + pos + '-' + iter;
+            var starsToShine = document.getElementsByClassName('glyphicon-star-' + pos[0] + '-' + pos[1] + '-' + iter);
+            starsToShine[0].className = 'glyphicon glyphicon-star star-' + pos[0] + '-' + pos[1] + ' glyphicon-star-' + pos[0] + '-' + pos[1] + '-' + iter;
         }
         for(iter2; 6 > iter2; iter2++) {
-            var starsToNotShine = document.getElementsByClassName('glyphicon-star-' + pos + '-' + iter2);
-            starsToNotShine[0].className = 'glyphicon glyphicon-star-empty star-' + pos + ' glyphicon-star-' + pos + '-' + iter2;
+            var starsToNotShine = document.getElementsByClassName('glyphicon-star-' + pos[0] + '-' + pos[1] + '-' + iter2);
+            starsToNotShine[0].className = 'glyphicon glyphicon-star-empty star-' + pos[0] + '-' + pos[1] + ' glyphicon-star-' + pos[0] + '-' + pos[1] + '-' + iter2;
         }
     }
 });
