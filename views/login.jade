@@ -16,12 +16,12 @@ block content
             td
               span Username
             td
-              input(class="input" type="text" name="username" minlength="6" maxlength="20" required)
+              input(class="input" type="text" name="username" minlength="6" maxlength="20" pattern=".{6,}" required)
           tr
             td
               span Password
             td
-              input(class="input" type="password" name="password" minlength="6" maxlength="20" required)
+              input(class="input" type="password" name="password" minlength="6" maxlength="20" pattern=".{6,}" required)
           tr
             td(colspan="2")
               input(class="submit" type="submit" value="Submit")
