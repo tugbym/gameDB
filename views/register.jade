@@ -17,39 +17,42 @@ block content
             td 
               span Username
             td
-              input(type="text" class="input" name="username" minlength="6" maxlength="20" pattern=".{6,}" required)
+              input(type="text" class="input" name="username" pattern=".{6,20}" required)
               span(class="glyphicon glyphicon-asterisk")
           tr
             td 
               span Password
             td
-              input(type="password" class="input" name="password" minlength="6" maxlength="20" pattern=".{6,}" required)
+              input(type="password" class="input" name="password" pattern=".{6,20}" required)
               span(class="glyphicon glyphicon-asterisk")
           tr
             td 
               span First Name
             td
-              input(type="text" class="input" name="first_name" minlength="2" maxlength="20" pattern=".{2,}" required)
+              input(type="text" class="input" name="first_name" pattern=".{2,20}" required)
               span(class="glyphicon glyphicon-asterisk")
           tr
             td 
               span Surname
             td
-              input(type="text" class="input" name="last_name" minlength="2" maxlength="20" pattern=".{2,}" required)
+              input(type="text" class="input" name="last_name" pattern=".{2,20}" required)
               span(class="glyphicon glyphicon-asterisk")
           tr
             td 
               span Date of Birth
             td
-              input(type="date" class="input" name="date_of_birth" pattern="[0-3][1-9]-[0-1][0-9]-[1-2][0-9][0-9][0-9]" placeholder="DD-MM-YYYY" required)
+              input(type="date" class="input" name="date_of_birth" pattern="[0-3][1-9]-[0-1][0-9]-[1-2][0-9][0-9][0-9]" placeholder="MM-DD-YYYY" required)
               span(class="glyphicon glyphicon-asterisk")
           tr
             td
               span Email Address
             td
-              input(type="text" class="input" name="email_address" maxlength="30" pattern="[a-z0-9._%+-]+[@]+[a-z0-9.-]+[.]+[a-z]{2,3}$" required)
+              input(type="text" class="input" name="email_address" pattern="[a-zA-Z0-9._%+-]+[@]+[a-z0-9.-]+[.]+[a-z]{2,3}$" required)
               span(class="glyphicon glyphicon-asterisk")
           tr
             td(colspan="2")
               input(type="submit" class="submit" value="Submit")
       p=result
+      if errors
+        each error in errors
+          p=error.message
